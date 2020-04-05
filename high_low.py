@@ -1,0 +1,30 @@
+import json
+
+with open('history_data.json') as json_file:
+    data = json.load(json_file)
+    day_min_max = []
+    min = 0
+    max = 0
+    day = 0
+    leap_counter = 0
+    for idx, hour in enumerate(data):
+        if idx % 24 == 0:
+            if idx != 0:
+                day_min_max.append({'date': day, 'high_temp': max, 'low_temp': min})
+                day += 1
+                if leap_counter % 4 == 0:
+                    if day == 366:
+                        leap_counter += 1
+                    day = day % 366
+                else:
+                    if day == 365:
+                        leap_counter += 1
+                    day = day % 365
+            min = hour["main"]["temp_min"]
+            max = hour["main"]["temp_max"]
+        if hour["main"]["temp_min"] < min:
+            min = hour["main"]["temp_min"]
+        if hour["main"]["temp_max"] > max:
+            max = hour["main"]["temp_max"]
+    with open('historical_day_data.json', 'w+') as outfile:
+        json.dump(day_min_max, outfile)
