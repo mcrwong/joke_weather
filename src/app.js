@@ -117,9 +117,29 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            input_temp: 60
+            input_temp: 60,
+            input_unit: 'F'
+        };
+        this.handleInput = this.handleInput.bind(this);
+        this.handleUnit = this.handleUnit.bind(this);
+    }
+
+    handleInput(event) {
+        if(event.target.value <= 500 && event.target.value >= -100){
+            this.setState({input_temp: event.target.value});
+        }
+        else if(event.target.value > 500){
+            this.setState({input_temp: 500})
+        }
+        else if(event.target.value < -100){
+            this.setState({input_temp: -100})
         }
     }
+
+    handleUnit(event) {
+        this.setState({input_unit: event.target.value});
+    }
+
     render(){
         return (
             <div>
@@ -128,7 +148,12 @@ class App extends React.Component {
                 </div>        
                 <div><Forcast/></div>
                 <div>
-                    <p>I think <input type="number" id="temperature" value={this.state.input_temp}></input> is warm</p>
+                    <p>I think <input autoFocus type="number" id="temperature" value={this.state.input_temp} onInput={this.handleInput}/>
+                    <select value={this.state.input_unit} onChange={this.handleUnit}>
+                        <option value="F">F</option>
+                        <option value="C">C</option>
+                        <option value="K">K</option>
+                        </select> is warm</p>
                 </div>
             </div>
         );
