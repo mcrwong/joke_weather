@@ -7,6 +7,9 @@
     width: 50%;
     padding: 10px;
 }
+.aligncenter {
+    text-align: center;
+}
 #forcast{
     display: flex;
     justify-content: center;
