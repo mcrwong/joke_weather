@@ -147,7 +147,7 @@ class App extends React.Component {
                 </div>        
                 <div><Forcast/></div>
                 <div className="center">
-                    <p className="aligncenter">I think <input autoFocus type="number" id="temperature" value={this.state.input_temp} onInput={this.handleInput}/>
+                    <p className="aligncenter">I think <input autoFocus type="number" id="temperature" value={this.state.input_temp} onChange={this.handleInput}/>
                     <select value={this.state.input_unit} onChange={this.handleUnit}>
                         <option value="F">F</option>
                         <option value="C">C</option>

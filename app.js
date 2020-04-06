@@ -298,7 +298,7 @@ var App = function (_React$Component3) {
                         'p',
                         { className: 'aligncenter' },
                         'I think ',
-                        React.createElement('input', { autoFocus: true, type: 'number', id: 'temperature', value: this.state.input_temp, onInput: this.handleInput }),
+                        React.createElement('input', { autoFocus: true, type: 'number', id: 'temperature', value: this.state.input_temp, onChange: this.handleInput }),
                         React.createElement(
                             'select',
                             { value: this.state.input_unit, onChange: this.handleUnit },
