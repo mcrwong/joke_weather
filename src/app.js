@@ -74,7 +74,7 @@ class Forcast extends React.Component{
         if(results.length > 0){
             if(results[0].isDaytime){
                 return (
-                    <div>
+                    <div id="forcast">
                         <div className="col"><Day data={results.slice(0, 2)}/></div>
                         <div className="col"><Day data={results.slice(2, 4)}/></div>
                         <div className="col"><Day data={results.slice(4, 6)}/></div>
@@ -87,7 +87,7 @@ class Forcast extends React.Component{
             }
             else{
                 return (
-                    <div>
+                    <div id="forcast">
                         <div className="col"><Day data={[results[0]]}/></div>
                         <div className="col"><Day data={results.slice(1, 3)}/></div>
                         <div className="col"><Day data={results.slice(3, 5)}/></div>
@@ -108,7 +108,7 @@ class Forcast extends React.Component{
 
     render(){
         return(
-            <div className="row align-items-center justify-content-center">{this.displayData(this.state.results)}</div>
+            <div className="row">{this.displayData(this.state.results)}</div>
         );
     }
 }
