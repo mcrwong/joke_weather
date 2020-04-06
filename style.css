@@ -6,8 +6,12 @@
     margin: auto;
     width: 50%;
     padding: 10px;
-  }
+}
+#forcast{
+    display: flex;
+    justify-content: center;
+}
 
-.aligncenter {
-    text-align: center;
+.col {
+    align-content: center;
 }
