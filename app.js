@@ -11,13 +11,245 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var e = React.createElement;
 var domContainer = document.querySelector('#root_container');
 
-var App = function (_React$Component) {
-    _inherits(App, _React$Component);
+var Day = function (_React$Component) {
+    _inherits(Day, _React$Component);
+
+    function Day(props) {
+        _classCallCheck(this, Day);
+
+        var _this = _possibleConstructorReturn(this, (Day.__proto__ || Object.getPrototypeOf(Day)).call(this, props));
+
+        _this.getDate = _this.getDate.bind(_this);
+        return _this;
+    }
+
+    _createClass(Day, [{
+        key: 'getDate',
+        value: function getDate(str) {
+            var date = str.split("T");
+            var parsedate = date[0].split("-");
+            return parsedate[1] + "/" + parsedate[2] + "/" + parsedate[0];
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            console.log(this.props.data);
+            if (this.props.data.length === 1) {
+                return React.createElement(
+                    'div',
+                    null,
+                    React.createElement(
+                        'p',
+                        null,
+                        this.props.data[0].name
+                    ),
+                    React.createElement(
+                        'p',
+                        null,
+                        this.getDate(this.props.data[0].startTime)
+                    ),
+                    React.createElement('img', { src: this.props.data[0].icon }),
+                    React.createElement(
+                        'p',
+                        null,
+                        'Current: ',
+                        this.props.data[0].temperature,
+                        this.props.data[0].temperatureUnit
+                    )
+                );
+            } else {
+                return React.createElement(
+                    'div',
+                    null,
+                    React.createElement(
+                        'p',
+                        null,
+                        this.props.data[0].name
+                    ),
+                    React.createElement(
+                        'p',
+                        null,
+                        this.getDate(this.props.data[0].startTime)
+                    ),
+                    React.createElement('img', { src: this.props.data[0].icon }),
+                    React.createElement(
+                        'p',
+                        null,
+                        'High: ',
+                        this.props.data[0].temperature,
+                        this.props.data[0].temperatureUnit
+                    ),
+                    React.createElement(
+                        'p',
+                        null,
+                        'Low: ',
+                        this.props.data[1].temperature,
+                        this.props.data[1].temperatureUnit
+                    )
+                );
+            }
+            return React.createElement('div', null);
+        }
+    }]);
+
+    return Day;
+}(React.Component);
+
+var Forcast = function (_React$Component2) {
+    _inherits(Forcast, _React$Component2);
+
+    function Forcast(props) {
+        _classCallCheck(this, Forcast);
+
+        var _this2 = _possibleConstructorReturn(this, (Forcast.__proto__ || Object.getPrototypeOf(Forcast)).call(this, props));
+
+        _this2.state = {
+            results: []
+        };
+        _this2.displayData = _this2.displayData.bind(_this2);
+        return _this2;
+    }
+
+    _createClass(Forcast, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this3 = this;
+
+            fetch("https://api.weather.gov/gridpoints/DTX/42,30/forecast?units=us", {
+                method: 'get',
+                headers: new Headers({
+                    'User-Agent': '(joke-weather.com, mcrwong@umich.edu)',
+                    'Accept': 'application/geo+json'
+                })
+            }).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                _this3.setState({
+                    results: data.properties.periods
+                });
+            }).catch(function (error) {
+                return console.log(error);
+            });
+        }
+    }, {
+        key: 'displayData',
+        value: function displayData(results) {
+            if (results.length > 0) {
+                if (results[0].isDaytime) {
+                    return React.createElement(
+                        'div',
+                        { className: 'row', id: 'forcast' },
+                        React.createElement(
+                            'div',
+                            { className: 'col' },
+                            React.createElement(Day, { data: results.slice(0, 2) })
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'col' },
+                            React.createElement(Day, { data: results.slice(2, 4) })
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'col' },
+                            React.createElement(Day, { data: results.slice(4, 6) })
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'col' },
+                            React.createElement(Day, { data: results.slice(6, 8) })
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'col' },
+                            React.createElement(Day, { data: results.slice(8, 10) })
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'col' },
+                            React.createElement(Day, { data: results.slice(10, 12) })
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'col' },
+                            React.createElement(Day, { data: results.slice(12) })
+                        )
+                    );
+                } else {
+                    return React.createElement(
+                        'div',
+                        { className: 'row', id: 'forcast' },
+                        React.createElement(
+                            'div',
+                            { className: 'col' },
+                            React.createElement(Day, { data: [results[0]] })
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'col' },
+                            React.createElement(Day, { data: results.slice(1, 3) })
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'col' },
+                            React.createElement(Day, { data: results.slice(3, 5) })
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'col' },
+                            React.createElement(Day, { data: results.slice(5, 7) })
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'col' },
+                            React.createElement(Day, { data: results.slice(7, 9) })
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'col' },
+                            React.createElement(Day, { data: results.slice(9, 11) })
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'col' },
+                            React.createElement(Day, { data: results.slice(11, 13) })
+                        )
+                    );
+                }
+            } else {
+                return React.createElement(
+                    'div',
+                    null,
+                    'Loading'
+                );
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                { className: 'container' },
+                this.displayData(this.state.results)
+            );
+        }
+    }]);
+
+    return Forcast;
+}(React.Component);
+
+var App = function (_React$Component3) {
+    _inherits(App, _React$Component3);
 
     function App(props) {
         _classCallCheck(this, App);
 
-        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+        var _this4 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+        _this4.state = {
+            input_temp: 60
+        };
+        return _this4;
     }
 
     _createClass(App, [{
@@ -25,11 +257,31 @@ var App = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 'div',
-                { id: 'title-container', className: 'center' },
+                null,
                 React.createElement(
-                    'h2',
-                    { id: 'title' },
-                    'When is it Warm'
+                    'div',
+                    { id: 'title-container', className: 'center' },
+                    React.createElement(
+                        'h2',
+                        { id: 'title' },
+                        'When is it Warm'
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    null,
+                    React.createElement(Forcast, null)
+                ),
+                React.createElement(
+                    'div',
+                    null,
+                    React.createElement(
+                        'p',
+                        null,
+                        'I think ',
+                        React.createElement('input', { type: 'number', id: 'temperature', value: this.state.input_temp }),
+                        ' is warm'
+                    )
                 )
             );
         }

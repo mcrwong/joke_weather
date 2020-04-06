@@ -74,7 +74,7 @@ class Forcast extends React.Component{
         if(results.length > 0){
             if(results[0].isDaytime){
                 return (
-                    <div id="forcast">
+                    <div className="row" id="forcast">
                         <div className="col"><Day data={results.slice(0, 2)}/></div>
                         <div className="col"><Day data={results.slice(2, 4)}/></div>
                         <div className="col"><Day data={results.slice(4, 6)}/></div>
@@ -87,7 +87,7 @@ class Forcast extends React.Component{
             }
             else{
                 return (
-                    <div id="forcast">
+                    <div className="row" id="forcast">
                         <div className="col"><Day data={[results[0]]}/></div>
                         <div className="col"><Day data={results.slice(1, 3)}/></div>
                         <div className="col"><Day data={results.slice(3, 5)}/></div>
@@ -108,7 +108,7 @@ class Forcast extends React.Component{
 
     render(){
         return(
-            <div className="row">{this.displayData(this.state.results)}</div>
+            <div className="container">{this.displayData(this.state.results)}</div>
         );
     }
 }
@@ -116,14 +116,21 @@ class Forcast extends React.Component{
 class App extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            input_temp: 60
+        }
     }
     render(){
         return (
             <div>
-            <div id="title-container" className="center">
-            <h2 id="title">When is it Warm</h2>
-            </div>        
-            <div><Forcast/></div></div>
+                <div id="title-container" className="center">
+                <h2 id="title">When is it Warm</h2>
+                </div>        
+                <div><Forcast/></div>
+                <div>
+                    <p>I think <input type="number" id="temperature" value={this.state.input_temp}></input> is warm</p>
+                </div>
+            </div>
         );
     }
 }
