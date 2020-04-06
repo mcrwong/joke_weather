@@ -282,7 +282,7 @@ var App = function (_React$Component3) {
                     { id: 'title-container', className: 'center' },
                     React.createElement(
                         'h2',
-                        { id: 'title' },
+                        { className: 'aligncenter', id: 'title' },
                         'When is it Warm'
                     )
                 ),
@@ -293,10 +293,10 @@ var App = function (_React$Component3) {
                 ),
                 React.createElement(
                     'div',
-                    null,
+                    { className: 'center' },
                     React.createElement(
                         'p',
-                        null,
+                        { className: 'aligncenter' },
                         'I think ',
                         React.createElement('input', { autoFocus: true, type: 'number', id: 'temperature', value: this.state.input_temp, onInput: this.handleInput }),
                         React.createElement(

@@ -1,5 +1,4 @@
 'use strict';
-
 const e = React.createElement;
 const domContainer = document.querySelector('#root_container');
 
@@ -144,16 +143,16 @@ class App extends React.Component {
         return (
             <div>
                 <div id="title-container" className="center">
-                <h2 id="title">When is it Warm</h2>
+                <h2 className="aligncenter" id="title">When is it Warm</h2>
                 </div>        
                 <div><Forcast/></div>
-                <div>
-                    <p>I think <input autoFocus type="number" id="temperature" value={this.state.input_temp} onInput={this.handleInput}/>
+                <div className="center">
+                    <p className="aligncenter">I think <input autoFocus type="number" id="temperature" value={this.state.input_temp} onInput={this.handleInput}/>
                     <select value={this.state.input_unit} onChange={this.handleUnit}>
                         <option value="F">F</option>
                         <option value="C">C</option>
                         <option value="K">K</option>
-                        </select> is warm</p>
+                    </select> is warm</p>
                 </div>
             </div>
         );
