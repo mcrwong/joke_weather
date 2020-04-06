@@ -17,4 +17,6 @@
 
 .col {
     align-content: center;
+    border: 1px solid black;
+    margin: 0px 10px;
 }
