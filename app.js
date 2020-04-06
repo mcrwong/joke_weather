@@ -138,11 +138,7 @@ var Forcast = function (_React$Component2) {
                 if (results[0].isDaytime) {
                     return React.createElement(
                         'div',
-<<<<<<< HEAD
-                        { id: 'forcast' },
-=======
                         { className: 'row', id: 'forcast' },
->>>>>>> c41bef3fa7cc79e05797feb0a2946598907902c3
                         React.createElement(
                             'div',
                             { className: 'col' },
@@ -182,11 +178,7 @@ var Forcast = function (_React$Component2) {
                 } else {
                     return React.createElement(
                         'div',
-<<<<<<< HEAD
-                        { id: 'forcast' },
-=======
                         { className: 'row', id: 'forcast' },
->>>>>>> c41bef3fa7cc79e05797feb0a2946598907902c3
                         React.createElement(
                             'div',
                             { className: 'col' },
@@ -237,11 +229,7 @@ var Forcast = function (_React$Component2) {
         value: function render() {
             return React.createElement(
                 'div',
-<<<<<<< HEAD
-                null,
-=======
                 { className: 'container' },
->>>>>>> c41bef3fa7cc79e05797feb0a2946598907902c3
                 this.displayData(this.state.results)
             );
         }
@@ -298,12 +286,6 @@ var App = function (_React$Component3) {
                         'When is it Warm'
                     )
                 ),
-<<<<<<< HEAD
-                React.createElement(
-                    'div',
-                    null,
-                    React.createElement(Forcast, null)
-=======
                 React.createElement(
                     'div',
                     null,
@@ -338,7 +320,6 @@ var App = function (_React$Component3) {
                         ),
                         ' is warm'
                     )
->>>>>>> c41bef3fa7cc79e05797feb0a2946598907902c3
                 )
             );
         }

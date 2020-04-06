@@ -108,11 +108,7 @@ class Forcast extends React.Component{
 
     render(){
         return(
-<<<<<<< HEAD
-            <div>{this.displayData(this.state.results)}</div>
-=======
             <div className="container">{this.displayData(this.state.results)}</div>
->>>>>>> c41bef3fa7cc79e05797feb0a2946598907902c3
         );
     }
 }
