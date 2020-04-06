@@ -108,7 +108,7 @@ class Forcast extends React.Component{
 
     render(){
         return(
-            <div className="row">{this.displayData(this.state.results)}</div>
+            <div>{this.displayData(this.state.results)}</div>
         );
     }
 }
