@@ -16,11 +16,12 @@ class Day extends React.Component{
     }
 
     render(){
+        console.log(this.props.data)
         if(this.props.data.length === 1){
             return(
                 <div>
                     <p>{this.props.data[0].name}</p>
-                    <p>{getDate(this.props[0].data.startTime)}</p>
+                    <p>{this.getDate(this.props.data[0].startTime)}</p>
                     <img src={this.props.data[0].icon}></img>
                     <p>Current: {this.props.data[0].temperature}{this.props.data[0].temperatureUnit}</p>
                 </div>
@@ -30,7 +31,7 @@ class Day extends React.Component{
             return(
                 <div>
                     <p>{this.props.data[0].name}</p>
-                    <p>{getDate(this.props[0].data.startTime)}</p>
+                    <p>{this.getDate(this.props.data[0].startTime)}</p>
                     <img src={this.props.data[0].icon}></img>
                     <p>High: {this.props.data[0].temperature}{this.props.data[0].temperatureUnit}</p>
                     <p>Low: {this.props.data[1].temperature}{this.props.data[1].temperatureUnit}</p>
@@ -38,6 +39,7 @@ class Day extends React.Component{
             );
 
         }
+       return (<div></div>);
         
     }
 
@@ -47,7 +49,7 @@ class Forcast extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-          results: {}
+          results: []
         };
         this.displayData = this.displayData.bind(this);
     }
@@ -69,40 +71,44 @@ class Forcast extends React.Component{
     }
 
     displayData(results){
-        console.log(results[0])
-        /*
-        if(results[0].isDaytime){
-            return (
-                <div>
-                    <div className="col"><Day data={results.slice(0, 2)}/></div>
-                    <div className="col"><Day data={results.slice(2, 4)}/></div>
-                    <div className="col"><Day data={results.slice(4, 6)}/></div>
-                    <div className="col"><Day data={results.slice(6, 8)}/></div>
-                    <div className="col"><Day data={results.slice(8, 10)}/></div>
-                    <div className="col"><Day data={results.slice(10, 12)}/></div>
-                    <div className="col"><Day data={results.slice(12)}/></div>
-                </div>
-            );
+        if(results.length > 0){
+            if(results[0].isDaytime){
+                return (
+                    <div>
+                        <div className="col"><Day data={results.slice(0, 2)}/></div>
+                        <div className="col"><Day data={results.slice(2, 4)}/></div>
+                        <div className="col"><Day data={results.slice(4, 6)}/></div>
+                        <div className="col"><Day data={results.slice(6, 8)}/></div>
+                        <div className="col"><Day data={results.slice(8, 10)}/></div>
+                        <div className="col"><Day data={results.slice(10, 12)}/></div>
+                        <div className="col"><Day data={results.slice(12)}/></div>
+                    </div>
+                );
+            }
+            else{
+                return (
+                    <div>
+                        <div className="col"><Day data={[results[0]]}/></div>
+                        <div className="col"><Day data={results.slice(1, 3)}/></div>
+                        <div className="col"><Day data={results.slice(3, 5)}/></div>
+                        <div className="col"><Day data={results.slice(5, 7)}/></div>
+                        <div className="col"><Day data={results.slice(7, 9)}/></div>
+                        <div className="col"><Day data={results.slice(9, 11)}/></div>
+                        <div className="col"><Day data={results.slice(11, 13)}/></div>
+                    </div>
+                );
+            }
         }
         else{
             return (
-                <div>
-                    <div className="col"><Day data={results[0]}/></div>
-                    <div className="col"><Day data={results.slice(1, 3)}/></div>
-                    <div className="col"><Day data={results.slice(3, 5)}/></div>
-                    <div className="col"><Day data={results.slice(5, 7)}/></div>
-                    <div className="col"><Day data={results.slice(7, 9)}/></div>
-                    <div className="col"><Day data={results.slice(9, 11)}/></div>
-                    <div className="col"><Day data={results.slice(11, 13)}/></div>
-                </div>
+                <div>Loading</div>
             );
         }
-        */
     }
 
     render(){
         return(
-            <div className="row align-items-center justify-content-center">{this.displayData(this.state.results)}</div>
+            <div className="row ">{this.displayData(this.state.results)}</div>
         );
     }
 }
