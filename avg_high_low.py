@@ -12,5 +12,9 @@ with open('historical_day_data.json') as json_file:
             year[day['date']]['high'] = max
             year[day['date']]['low'] = min
             year[day['date']]['count'] += 1
+    for key in year.keys():
+        year[key]['avg'] = int(round((year[key]['high'] + year[key]['low'])/2))
+        year[key]['high'] = int(round(year[key]['high']))
+        year[key]['low'] = int(round(year[key]['low']))
     with open('avg_year_temps.json', 'w+') as outfile:
         json.dump(year, outfile)

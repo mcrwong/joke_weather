@@ -138,7 +138,11 @@ var Forcast = function (_React$Component2) {
                 if (results[0].isDaytime) {
                     return React.createElement(
                         'div',
+<<<<<<< HEAD
                         { id: 'forcast' },
+=======
+                        { className: 'row', id: 'forcast' },
+>>>>>>> c41bef3fa7cc79e05797feb0a2946598907902c3
                         React.createElement(
                             'div',
                             { className: 'col' },
@@ -178,7 +182,11 @@ var Forcast = function (_React$Component2) {
                 } else {
                     return React.createElement(
                         'div',
+<<<<<<< HEAD
                         { id: 'forcast' },
+=======
+                        { className: 'row', id: 'forcast' },
+>>>>>>> c41bef3fa7cc79e05797feb0a2946598907902c3
                         React.createElement(
                             'div',
                             { className: 'col' },
@@ -229,7 +237,11 @@ var Forcast = function (_React$Component2) {
         value: function render() {
             return React.createElement(
                 'div',
+<<<<<<< HEAD
                 null,
+=======
+                { className: 'container' },
+>>>>>>> c41bef3fa7cc79e05797feb0a2946598907902c3
                 this.displayData(this.state.results)
             );
         }
@@ -244,10 +256,34 @@ var App = function (_React$Component3) {
     function App(props) {
         _classCallCheck(this, App);
 
-        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+        var _this4 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+        _this4.state = {
+            input_temp: 60,
+            input_unit: 'F'
+        };
+        _this4.handleInput = _this4.handleInput.bind(_this4);
+        _this4.handleUnit = _this4.handleUnit.bind(_this4);
+        return _this4;
     }
 
     _createClass(App, [{
+        key: 'handleInput',
+        value: function handleInput(event) {
+            if (event.target.value <= 500 && event.target.value >= -100) {
+                this.setState({ input_temp: event.target.value });
+            } else if (event.target.value > 500) {
+                this.setState({ input_temp: 500 });
+            } else if (event.target.value < -100) {
+                this.setState({ input_temp: -100 });
+            }
+        }
+    }, {
+        key: 'handleUnit',
+        value: function handleUnit(event) {
+            this.setState({ input_unit: event.target.value });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
@@ -262,10 +298,47 @@ var App = function (_React$Component3) {
                         'When is it Warm'
                     )
                 ),
+<<<<<<< HEAD
                 React.createElement(
                     'div',
                     null,
                     React.createElement(Forcast, null)
+=======
+                React.createElement(
+                    'div',
+                    null,
+                    React.createElement(Forcast, null)
+                ),
+                React.createElement(
+                    'div',
+                    null,
+                    React.createElement(
+                        'p',
+                        null,
+                        'I think ',
+                        React.createElement('input', { autoFocus: true, type: 'number', id: 'temperature', value: this.state.input_temp, onInput: this.handleInput }),
+                        React.createElement(
+                            'select',
+                            { value: this.state.input_unit, onChange: this.handleUnit },
+                            React.createElement(
+                                'option',
+                                { value: 'F' },
+                                'F'
+                            ),
+                            React.createElement(
+                                'option',
+                                { value: 'C' },
+                                'C'
+                            ),
+                            React.createElement(
+                                'option',
+                                { value: 'K' },
+                                'K'
+                            )
+                        ),
+                        ' is warm'
+                    )
+>>>>>>> c41bef3fa7cc79e05797feb0a2946598907902c3
                 )
             );
         }
