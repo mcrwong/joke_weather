@@ -1,6 +1,17 @@
+body {
+    background-color: #f9e6ba;
+}
+#title {
+    text-align: center;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
 #title-container {
     position: relative;
-    border: 3px solid black;
+    border: 3px solid;
+    border-color: #f2cd75;
+    background-color: #f5d997;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .center {
     margin: auto;
