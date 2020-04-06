@@ -1,4 +1,6 @@
 'use strict';
+//import {leap_year_date, year_date} from "./date_map.js";
+
 const e = React.createElement;
 const domContainer = document.querySelector('#root_container');
 
@@ -15,7 +17,6 @@ class Day extends React.Component{
     }
 
     render(){
-        console.log(this.props.data)
         if(this.props.data.length === 1){
             return(
                 <div>

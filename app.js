@@ -1,4 +1,5 @@
 'use strict';
+//import {leap_year_date, year_date} from "./date_map.js";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -33,7 +34,6 @@ var Day = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            console.log(this.props.data);
             if (this.props.data.length === 1) {
                 return React.createElement(
                     'div',
