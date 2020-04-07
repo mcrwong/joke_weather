@@ -337,7 +337,7 @@ var App = function (_React$Component3) {
                                 'K'
                             )
                         ),
-                        ' is warm'
+                        ' is warm.'
                     )
                 )
             );

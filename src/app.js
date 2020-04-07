@@ -169,7 +169,7 @@ class App extends React.Component {
                         <option value="F">F</option>
                         <option value="C">C</option>
                         <option value="K">K</option>
-                    </select> is warm</p>
+                    </select> is warm.</p>
                 </div>
             </div>
         );
