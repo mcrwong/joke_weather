@@ -33,8 +33,8 @@ class Day extends React.Component{
                     <p>{this.props.data[0].name}</p>
                     <p>{this.getDate(this.props.data[0].startTime)}</p>
                     <img src={this.props.data[0].icon}></img>
-                    <p>High: {this.props.data[0].temperature}{this.props.data[0].temperatureUnit}</p>
-                    <p>Low: {this.props.data[1].temperature}{this.props.data[1].temperatureUnit}</p>
+                    <p id="hightext">High: {this.props.data[0].temperature}{this.props.data[0].temperatureUnit}</p>
+                    <p id="lowtext">Low: {this.props.data[1].temperature}{this.props.data[1].temperatureUnit}</p>
                 </div>
             );
 
@@ -144,7 +144,8 @@ class App extends React.Component {
         return (
             <div>
                 <div id="title-container" className="center">
-                <h2 className="aligncenter" id="title">When is it Warm</h2>
+                <h2 className="aligncenter" id="title">When is it Warm <img src = "titleicon.png" id="titlepic"></img></h2>
+                <p id="annarbor">...in Ann Arbor?</p>
                 </div>        
                 <div><Forcast/></div>
                 <div className="center">
