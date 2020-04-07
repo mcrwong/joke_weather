@@ -23,7 +23,7 @@ class Day extends React.Component{
                     <p>{this.props.data[0].name}</p>
                     <p>{this.getDate(this.props.data[0].startTime)}</p>
                     <img src={this.props.data[0].icon}></img>
-                    <p>Current: {this.props.data[0].temperature}{this.props.data[0].temperatureUnit}</p>
+                    <p>Current: {this.props.unitconvert(this.props.data[0].temperature)}{this.props.unit}</p>
                 </div>
             );
         }
@@ -33,8 +33,8 @@ class Day extends React.Component{
                     <p>{this.props.data[0].name}</p>
                     <p>{this.getDate(this.props.data[0].startTime)}</p>
                     <img src={this.props.data[0].icon}></img>
-                    <p>High: {this.props.data[0].temperature}{this.props.data[0].temperatureUnit}</p>
-                    <p>Low: {this.props.data[1].temperature}{this.props.data[1].temperatureUnit}</p>
+                    <p>High: {this.props.unitconvert(this.props.data[0].temperature)}{this.props.unit}</p>
+                    <p>Low: {this.props.unitconvert(this.props.data[1].temperature)}{this.props.unit}</p>
                 </div>
             );
 
@@ -75,26 +75,26 @@ class Forcast extends React.Component{
             if(results[0].isDaytime){
                 return (
                     <div className="row" id="forcast">
-                        <div className="col"><Day data={results.slice(0, 2)}/></div>
-                        <div className="col"><Day data={results.slice(2, 4)}/></div>
-                        <div className="col"><Day data={results.slice(4, 6)}/></div>
-                        <div className="col"><Day data={results.slice(6, 8)}/></div>
-                        <div className="col"><Day data={results.slice(8, 10)}/></div>
-                        <div className="col"><Day data={results.slice(10, 12)}/></div>
-                        <div className="col"><Day data={results.slice(12)}/></div>
+                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(0, 2)}/></div>
+                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(2, 4)}/></div>
+                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(4, 6)}/></div>
+                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(6, 8)}/></div>
+                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(8, 10)}/></div>
+                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(10, 12)}/></div>
+                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(12)}/></div>
                     </div>
                 );
             }
             else{
                 return (
                     <div className="row" id="forcast">
-                        <div className="col"><Day data={[results[0]]}/></div>
-                        <div className="col"><Day data={results.slice(1, 3)}/></div>
-                        <div className="col"><Day data={results.slice(3, 5)}/></div>
-                        <div className="col"><Day data={results.slice(5, 7)}/></div>
-                        <div className="col"><Day data={results.slice(7, 9)}/></div>
-                        <div className="col"><Day data={results.slice(9, 11)}/></div>
-                        <div className="col"><Day data={results.slice(11, 13)}/></div>
+                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={[results[0]]}/></div>
+                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(1, 3)}/></div>
+                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(3, 5)}/></div>
+                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(5, 7)}/></div>
+                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(7, 9)}/></div>
+                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(9, 11)}/></div>
+                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(11, 13)}/></div>
                     </div>
                 );
             }
@@ -122,6 +122,7 @@ class App extends React.Component {
         };
         this.handleInput = this.handleInput.bind(this);
         this.handleUnit = this.handleUnit.bind(this);
+        this.unitconvert = this.unitconvert.bind(this);
     }
 
     handleInput(event) {
@@ -140,13 +141,28 @@ class App extends React.Component {
         this.setState({input_unit: event.target.value});
     }
 
+
+    unitconvert(number) {
+        if(this.state.input_unit != 'F'){
+            if(this.state.input_unit === 'C'){
+                return Math.round((number - 32)*(5.0/9.0))
+            }
+            else{
+                return Math.round((number - 32)*(5.0/9.0)+273.15)
+            }
+        }
+        else{
+            return number
+        }
+    }
+
     render(){
         return (
             <div>
                 <div id="title-container" className="center">
                 <h2 className="aligncenter" id="title">When is it Warm</h2>
                 </div>        
-                <div><Forcast/></div>
+                <div><Forcast unitconvert={this.unitconvert} unit={this.state.input_unit}/></div>
                 <div className="center">
                     <p className="aligncenter">I think <input autoFocus type="number" id="temperature" value={this.state.input_temp} onChange={this.handleInput}/>
                     <select value={this.state.input_unit} onChange={this.handleUnit}>

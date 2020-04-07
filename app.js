@@ -53,8 +53,8 @@ var Day = function (_React$Component) {
                         'p',
                         null,
                         'Current: ',
-                        this.props.data[0].temperature,
-                        this.props.data[0].temperatureUnit
+                        this.props.unitconvert(this.props.data[0].temperature),
+                        this.props.unit
                     )
                 );
             } else {
@@ -74,17 +74,17 @@ var Day = function (_React$Component) {
                     React.createElement('img', { src: this.props.data[0].icon }),
                     React.createElement(
                         'p',
-                        {id: 'hightext'},
+                        null,
                         'High: ',
-                        this.props.data[0].temperature,
-                        this.props.data[0].temperatureUnit
+                        this.props.unitconvert(this.props.data[0].temperature),
+                        this.props.unit
                     ),
                     React.createElement(
                         'p',
-                        {id: 'lowtext'},
+                        null,
                         'Low: ',
-                        this.props.data[1].temperature,
-                        this.props.data[1].temperatureUnit
+                        this.props.unitconvert(this.props.data[1].temperature),
+                        this.props.unit
                     )
                 );
             }
@@ -142,37 +142,37 @@ var Forcast = function (_React$Component2) {
                         React.createElement(
                             'div',
                             { className: 'col' },
-                            React.createElement(Day, { data: results.slice(0, 2) })
+                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(0, 2) })
                         ),
                         React.createElement(
                             'div',
                             { className: 'col' },
-                            React.createElement(Day, { data: results.slice(2, 4) })
+                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(2, 4) })
                         ),
                         React.createElement(
                             'div',
                             { className: 'col' },
-                            React.createElement(Day, { data: results.slice(4, 6) })
+                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(4, 6) })
                         ),
                         React.createElement(
                             'div',
                             { className: 'col' },
-                            React.createElement(Day, { data: results.slice(6, 8) })
+                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(6, 8) })
                         ),
                         React.createElement(
                             'div',
                             { className: 'col' },
-                            React.createElement(Day, { data: results.slice(8, 10) })
+                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(8, 10) })
                         ),
                         React.createElement(
                             'div',
                             { className: 'col' },
-                            React.createElement(Day, { data: results.slice(10, 12) })
+                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(10, 12) })
                         ),
                         React.createElement(
                             'div',
                             { className: 'col' },
-                            React.createElement(Day, { data: results.slice(12) })
+                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(12) })
                         )
                     );
                 } else {
@@ -182,37 +182,37 @@ var Forcast = function (_React$Component2) {
                         React.createElement(
                             'div',
                             { className: 'col' },
-                            React.createElement(Day, { data: [results[0]] })
+                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: [results[0]] })
                         ),
                         React.createElement(
                             'div',
                             { className: 'col' },
-                            React.createElement(Day, { data: results.slice(1, 3) })
+                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(1, 3) })
                         ),
                         React.createElement(
                             'div',
                             { className: 'col' },
-                            React.createElement(Day, { data: results.slice(3, 5) })
+                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(3, 5) })
                         ),
                         React.createElement(
                             'div',
                             { className: 'col' },
-                            React.createElement(Day, { data: results.slice(5, 7) })
+                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(5, 7) })
                         ),
                         React.createElement(
                             'div',
                             { className: 'col' },
-                            React.createElement(Day, { data: results.slice(7, 9) })
+                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(7, 9) })
                         ),
                         React.createElement(
                             'div',
                             { className: 'col' },
-                            React.createElement(Day, { data: results.slice(9, 11) })
+                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(9, 11) })
                         ),
                         React.createElement(
                             'div',
                             { className: 'col' },
-                            React.createElement(Day, { data: results.slice(11, 13) })
+                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(11, 13) })
                         )
                     );
                 }
@@ -252,6 +252,7 @@ var App = function (_React$Component3) {
         };
         _this4.handleInput = _this4.handleInput.bind(_this4);
         _this4.handleUnit = _this4.handleUnit.bind(_this4);
+        _this4.unitconvert = _this4.unitconvert.bind(_this4);
         return _this4;
     }
 
@@ -272,6 +273,19 @@ var App = function (_React$Component3) {
             this.setState({ input_unit: event.target.value });
         }
     }, {
+        key: 'unitconvert',
+        value: function unitconvert(number) {
+            if (this.state.input_unit != 'F') {
+                if (this.state.input_unit === 'C') {
+                    return Math.round((number - 32) * (5.0 / 9.0));
+                } else {
+                    return Math.round((number - 32) * (5.0 / 9.0) + 273.15);
+                }
+            } else {
+                return number;
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
@@ -283,22 +297,13 @@ var App = function (_React$Component3) {
                     React.createElement(
                         'h2',
                         { className: 'aligncenter', id: 'title' },
-                        'When is it Warm', 
-                        React.createElement(
-                            'img',
-                            {id: 'titlepic', src: 'titleicon.png'}
-                        ),
-                            React.createElement(
-                                'p', 
-                                {id: "annarbor"}, 
-                                '...in Ann Arbor?'
-                            )
+                        'When is it Warm'
                     )
                 ),
                 React.createElement(
                     'div',
                     null,
-                    React.createElement(Forcast, null)
+                    React.createElement(Forcast, { unitconvert: this.unitconvert, unit: this.state.input_unit })
                 ),
                 React.createElement(
                     'div',
