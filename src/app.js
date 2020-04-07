@@ -1,5 +1,4 @@
 'use strict';
-//import {leap_year_date, year_date} from "./date_map.js";
 
 const e = React.createElement;
 const domContainer = document.querySelector('#root_container');
@@ -80,26 +79,28 @@ class Forcast extends React.Component {
             if (results[0].isDaytime) {
                 return (
                     <div className="row" id="forcast">
-                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(0, 2)} /></div>
-                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(2, 4)} /></div>
-                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(4, 6)} /></div>
-                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(6, 8)} /></div>
-                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(8, 10)} /></div>
-                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(10, 12)} /></div>
-                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(12)} /></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(0, 2)}/></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(2, 4)}/></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(4, 6)}/></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(6, 8)}/></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(8, 10)}/></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(10, 12)}/></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(12)}/></div>
+
                     </div>
                 );
             }
             else {
                 return (
                     <div className="row" id="forcast">
-                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={[results[0]]} /></div>
-                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(1, 3)} /></div>
-                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(3, 5)} /></div>
-                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(5, 7)} /></div>
-                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(7, 9)} /></div>
-                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(9, 11)} /></div>
-                        <div className="col"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(11, 13)} /></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={[results[0]]}/></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(1, 3)}/></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(3, 5)}/></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(5, 7)}/></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(7, 9)}/></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(9, 11)}/></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(11, 13)}/></div>
+
                     </div>
                 );
             }

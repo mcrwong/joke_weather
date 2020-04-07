@@ -54,3 +54,7 @@ img {
     text-align: center;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
+
+.day {
+    border: 2px solid black;
+}
