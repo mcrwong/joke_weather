@@ -74,14 +74,22 @@ var Day = function (_React$Component) {
                     React.createElement('img', { src: this.props.data[0].icon }),
                     React.createElement(
                         'p',
+<<<<<<< HEAD
                         null,
+=======
+                        { id: 'hightext' },
+>>>>>>> 2422c6ae3e3890b651208c302e61a519a50c35c4
                         'High: ',
                         this.props.unitconvert(this.props.data[0].temperature),
                         this.props.unit
                     ),
                     React.createElement(
                         'p',
+<<<<<<< HEAD
                         null,
+=======
+                        { id: 'lowtext' },
+>>>>>>> 2422c6ae3e3890b651208c302e61a519a50c35c4
                         'Low: ',
                         this.props.unitconvert(this.props.data[1].temperature),
                         this.props.unit
@@ -297,7 +305,17 @@ var App = function (_React$Component3) {
                     React.createElement(
                         'h2',
                         { className: 'aligncenter', id: 'title' },
+<<<<<<< HEAD
                         'When is it Warm'
+=======
+                        'When is it Warm ',
+                        React.createElement('img', { src: 'titleicon.png', id: 'titlepic' })
+                    ),
+                    React.createElement(
+                        'p',
+                        { id: 'annarbor' },
+                        '...in Ann Arbor?'
+>>>>>>> 2422c6ae3e3890b651208c302e61a519a50c35c4
                     )
                 ),
                 React.createElement(
