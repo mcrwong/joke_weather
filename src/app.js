@@ -212,16 +212,16 @@ class Periods extends React.Component {
         }
         this.createPeriods = this.createPeriods.bind(this);
     }
+
     componentDidMount()
     {
+        let temp = this.createPeriods()
+        console.log(temp)
         this.setState({
-            results: this.createPeriods()
+            results: temp
         })
-        console.log(this.results)
+        console.log(this.state.results)
     }
-
-
-
 
 
     createPeriods() {
@@ -236,8 +236,8 @@ class Periods extends React.Component {
         var i = 0;
         while (i < daysAfterToday.length) {
             var period = []
-            if (daysAfterToday[i] > this.input_temp) {
-                while (daysAfterToday[i] > this.input_temp) {
+            if (daysAfterToday[i] > this.props.input_temp) {
+                while (daysAfterToday[i] > this.props.input_temp) {
                     var day = todayNum + i;
                     period.push({ day: daysAfterToday[i] });
                     i++;
@@ -262,7 +262,7 @@ class Periods extends React.Component {
             <div>
                 <div></div>
 
-                <p> input_tmp: {this.props.input_temp}, day#: {this.state.today}, {this.state.results} </p>
+                <p> input_tmp: {this.props.input_temp}, day#: {this.state.today} </p>
 
             </div>
         )
