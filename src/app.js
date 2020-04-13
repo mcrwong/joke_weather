@@ -79,26 +79,26 @@ class Forcast extends React.Component {
             if (results[0].isDaytime) {
                 return (
                     <div className="row" id="forcast">
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(0, 2)}/></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(2, 4)}/></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(4, 6)}/></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(6, 8)}/></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(8, 10)}/></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(10, 12)}/></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(12)}/></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(0, 2)} /></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(2, 4)} /></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(4, 6)} /></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(6, 8)} /></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(8, 10)} /></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(10, 12)} /></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(12)} /></div>
                     </div>
                 );
             }
             else {
                 return (
                     <div className="row" id="forcast">
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={[results[0]]}/></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(1, 3)}/></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(3, 5)}/></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(5, 7)}/></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(7, 9)}/></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(9, 11)}/></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(11, 13)}/></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={[results[0]]} /></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(1, 3)} /></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(3, 5)} /></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(5, 7)} /></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(7, 9)} /></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(9, 11)} /></div>
+                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(11, 13)} /></div>
                     </div>
                 );
             }
@@ -169,12 +169,12 @@ class App extends React.Component {
                 </div>
                 <div><Forcast unitconvert={this.unitconvert} unit={this.state.input_unit} /></div>
                 <div className="center">
-                    <p className="aligncenter">I think <input autoFocus type="number" id="temperature" value={this.state.input_temp} onChange={this.handleInput}/>
-                    <select value={this.state.input_unit} onChange={this.handleUnit}>
-                        <option value="F">F</option>
-                        <option value="C">C</option>
-                        <option value="K">K</option>
-                    </select> is warm.</p>
+                    <p className="aligncenter">I think <input autoFocus type="number" id="temperature" value={this.state.input_temp} onChange={this.handleInput} />
+                        <select value={this.state.input_unit} onChange={this.handleUnit}>
+                            <option value="F">F</option>
+                            <option value="C">C</option>
+                            <option value="K">K</option>
+                        </select> is warm.</p>
                 </div>
                 <div><Periods unitconvert={this.unitconvert} unit={this.state.input_unit} input_temp={this.state.input_temp} /></div>
             </div>
@@ -213,8 +213,7 @@ class Periods extends React.Component {
         this.createPeriods = this.createPeriods.bind(this);
     }
 
-    componentDidMount()
-    {
+    componentDidMount() {
         let temp = this.createPeriods()
         console.log(temp)
         this.setState({
@@ -239,7 +238,7 @@ class Periods extends React.Component {
             if (daysAfterToday[i] > this.props.input_temp) {
                 while (daysAfterToday[i] > this.props.input_temp) {
                     var day = todayNum + i;
-                    period.push({ day: daysAfterToday[i] });
+                    period.push({ day: (todayNum + i), temperature: daysAfterToday[i] });
                     i++;
                 }
                 console.log(period);
@@ -257,12 +256,59 @@ class Periods extends React.Component {
         //console.log(this.state.results);
     }
 
+    doyToDate(doy) {
+        var d = new Date();
+        d.setMonth(0);
+        d.setDate(1);
+        d.setDate(doy);
+        var months = ["January ", "February ", "March ", "April ", "May ", "June ", "July ", "August ", "September ", "October ", "November ", "December "];
+
+
+        return (months[d.getMonth()].concat(d.getDate().toString(), " ", d.getFullYear().toString()));
+    }
+
+    displayData(results) {
+        var period_avgs = [];
+        if (this.state.results.length > 0)
+        {
+            for (var i = 0; i < this.state.results.length; i++)
+            {
+                var sum = 0;
+                for (var j = 0; j < this.state.results[i].length; j++)
+                {
+                    sum += this.state.results[i][j].temperature;
+                }
+                sum = sum / this.state.results[i].length; 
+                period_avgs.push(sum);
+                console.log("period avg: ", i, " ", sum);
+            }
+        }
+
+
+
+        return
+        (
+            <div>
+                <div className="periodOfDays">
+                    {this.doyToDate(104)}
+
+                    <ul>
+                        {this.state.results.map(period => <li>{period}</li>)}
+                    </ul>
+
+                </div>    
+            </div>
+
+        );
+    }
+
+
     render() {
         return (
             <div>
                 <div></div>
 
-                <p> input_tmp: {this.props.input_temp}, day#: {this.state.today} </p>
+                <p> input_tmp: {this.props.input_temp}, day#: {this.state.today}, date: {this.doyToDate(this.state.today)}, template: {this.displayData( this.state.results )} </p>
 
             </div>
         )

@@ -417,7 +417,7 @@ var Periods = function (_React$Component4) {
                 if (daysAfterToday[i] > this.props.input_temp) {
                     while (daysAfterToday[i] > this.props.input_temp) {
                         var day = todayNum + i;
-                        period.push({ day: daysAfterToday[i] });
+                        period.push({ day: todayNum + i, temperature: daysAfterToday[i] });
                         i++;
                     }
                     console.log(period);
@@ -433,6 +433,55 @@ var Periods = function (_React$Component4) {
             //console.log(this.state.results);
         }
     }, {
+        key: 'doyToDate',
+        value: function doyToDate(doy) {
+            var d = new Date();
+            d.setMonth(0);
+            d.setDate(1);
+            d.setDate(doy);
+            var months = ["January ", "February ", "March ", "April ", "May ", "June ", "July ", "August ", "September ", "October ", "November ", "December "];
+
+            return months[d.getMonth()].concat(d.getDate().toString(), " ", d.getFullYear().toString());
+        }
+    }, {
+        key: 'displayData',
+        value: function displayData(results) {
+            var period_avgs = [];
+            if (this.state.results.length > 0) {
+                for (var i = 0; i < this.state.results.length; i++) {
+                    var sum = 0;
+                    for (var j = 0; j < this.state.results[i].length; j++) {
+                        sum += this.state.results[i][j].temperature;
+                    }
+                    sum = sum / this.state.results[i].length;
+                    period_avgs.push(sum);
+                    console.log("period avg: ", i, " ", sum);
+                }
+            }
+
+            return;
+            React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'div',
+                    { className: 'periodOfDays' },
+                    this.doyToDate(104),
+                    React.createElement(
+                        'ul',
+                        null,
+                        this.state.results.map(function (period) {
+                            return React.createElement(
+                                'li',
+                                null,
+                                period
+                            );
+                        })
+                    )
+                )
+            );
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
@@ -446,6 +495,10 @@ var Periods = function (_React$Component4) {
                     this.props.input_temp,
                     ', day#: ',
                     this.state.today,
+                    ', date: ',
+                    this.doyToDate(this.state.today),
+                    ', template: ',
+                    this.displayData(this.state.results),
                     ' '
                 )
             );
