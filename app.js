@@ -537,18 +537,45 @@ var Periods = function (_React$Component6) {
             var _this8 = this;
 
             console.log("rerendering periods");
-            var periods = this.props.results.map(function (period, index) {
-                return _this8.displayData(period, index);
-            });
-            if (Array.isArray(this.props.extension) && this.props.extension.length > 0) {
-                console.log(this.props.extension.length);
-                var extperiod = this.props.extension.map(function (day) {
-                    return _this8.displayDay(day);
-                });
+            if (this.props.results.length <= 0) {
                 return React.createElement(
-                    'div',
+                    'p',
                     null,
-                    React.createElement(
+                    'No results found. Try a different temperature.'
+                );
+            } else {
+                var periods = this.props.results.map(function (period, index) {
+                    return _this8.displayData(period, index);
+                });
+                if (Array.isArray(this.props.extension) && this.props.extension.length > 0) {
+                    console.log(this.props.extension.length);
+                    var extperiod = this.props.extension.map(function (day) {
+                        return _this8.displayDay(day);
+                    });
+                    return React.createElement(
+                        'div',
+                        null,
+                        React.createElement(
+                            'div',
+                            { className: 'container' },
+                            React.createElement(
+                                'div',
+                                { className: 'row forcast' },
+                                periods
+                            )
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'container' },
+                            React.createElement(
+                                'div',
+                                { className: 'row forcast scroll' },
+                                extperiod
+                            )
+                        )
+                    );
+                } else {
+                    return React.createElement(
                         'div',
                         { className: 'container' },
                         React.createElement(
@@ -556,27 +583,8 @@ var Periods = function (_React$Component6) {
                             { className: 'row forcast' },
                             periods
                         )
-                    ),
-                    React.createElement(
-                        'div',
-                        { className: 'container' },
-                        React.createElement(
-                            'div',
-                            { className: 'row forcast scroll' },
-                            extperiod
-                        )
-                    )
-                );
-            } else {
-                return React.createElement(
-                    'div',
-                    { className: 'container' },
-                    React.createElement(
-                        'div',
-                        { className: 'row forcast' },
-                        periods
-                    )
-                );
+                    );
+                }
             }
         }
     }]);

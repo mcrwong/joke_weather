@@ -323,6 +323,12 @@ class Periods extends React.Component {
 
     render() {
         console.log("rerendering periods")
+        if(this.props.results.length <= 0){
+            return(
+                <p>No results found. Try a different temperature.</p>
+            )
+        }
+        else{
         const periods = this.props.results.map((period, index) =>
         this.displayData(period, index)
         )
@@ -356,6 +362,7 @@ class Periods extends React.Component {
             )
         }
     }
+}
 }
 
 ReactDOM.render(e(App), domContainer);
