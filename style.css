@@ -82,7 +82,7 @@ img {
 }
 
 .scroll {
-    overflow-x: scroll;
+    overflow-x: auto;
     display: flex;
     justify-content: flex-start;
     text-align: center;
