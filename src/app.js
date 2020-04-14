@@ -42,7 +42,7 @@ class Day extends React.Component {
         if(this.state.clicked){
             if (this.props.data.length === 1) {
                 return (
-                    <div className="border" onClick={this.handleClick}>
+                    <div className="col day border" onClick={this.handleClick}>
                         <p>{this.props.data[0].name}</p>
                         <p>{this.getDate(this.props.data[0].startTime)}</p>
                         <img src={this.props.data[0].icon}></img>
@@ -52,7 +52,7 @@ class Day extends React.Component {
             }
             else {
                 return (
-                    <div className="border" onClick={this.handleClick}>
+                    <div className="col day border" onClick={this.handleClick}>
                         <p>{this.props.data[0].name}</p>
                         <p>{this.getDate(this.props.data[0].startTime)}</p>
                         <img src={this.props.data[0].icon}></img>
@@ -65,7 +65,7 @@ class Day extends React.Component {
         else{
             if (this.props.data.length === 1) {
                 return (
-                    <div onClick={this.handleClick}>
+                    <div className="col day" onClick={this.handleClick}>
                         <p>{this.props.data[0].name}</p>
                         <p>{this.getDate(this.props.data[0].startTime)}</p>
                         <img src={this.props.data[0].icon}></img>
@@ -75,7 +75,7 @@ class Day extends React.Component {
             }
             else {
                 return (
-                    <div onClick={this.handleClick}>
+                    <div className="col day" onClick={this.handleClick}>
                         <p>{this.props.data[0].name}</p>
                         <p>{this.getDate(this.props.data[0].startTime)}</p>
                         <img src={this.props.data[0].icon}></img>
@@ -121,26 +121,26 @@ class Forcast extends React.Component {
             if (results[0].isDaytime) {
                 return (
                     <div className="row forcast" id="forcast">
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(0, 2)} /></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(2, 4)} /></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(4, 6)} /></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(6, 8)} /></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(8, 10)} /></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(10, 12)} /></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(12)} /></div>
+                        <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(0, 2)} />
+                        <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(2, 4)} />
+                        <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(4, 6)} />
+                        <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(6, 8)} />
+                        <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(8, 10)} />
+                        <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(10, 12)} />
+                        <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(12)} />
                     </div>
                 );
             }
             else {
                 return (
                     <div className="row forcast" id="forcast">
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={[results[0]]} /></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(1, 3)} /></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(3, 5)} /></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(5, 7)} /></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(7, 9)} /></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(9, 11)} /></div>
-                        <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(11, 13)} /></div>
+                        <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={[results[0]]} />
+                        <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(1, 3)} />
+                        <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(3, 5)} />
+                        <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(5, 7)} />
+                        <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(7, 9)} />
+                        <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(9, 11)} />
+                        <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(11, 13)} />
                     </div>
                 );
             }

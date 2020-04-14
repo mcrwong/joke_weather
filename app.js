@@ -56,7 +56,7 @@ var Day = function (_React$Component) {
                 if (this.props.data.length === 1) {
                     return React.createElement(
                         'div',
-                        { className: 'border', onClick: this.handleClick },
+                        { className: 'col day border', onClick: this.handleClick },
                         React.createElement(
                             'p',
                             null,
@@ -79,7 +79,7 @@ var Day = function (_React$Component) {
                 } else {
                     return React.createElement(
                         'div',
-                        { className: 'border', onClick: this.handleClick },
+                        { className: 'col day border', onClick: this.handleClick },
                         React.createElement(
                             'p',
                             null,
@@ -111,7 +111,7 @@ var Day = function (_React$Component) {
                 if (this.props.data.length === 1) {
                     return React.createElement(
                         'div',
-                        { onClick: this.handleClick },
+                        { className: 'col day', onClick: this.handleClick },
                         React.createElement(
                             'p',
                             null,
@@ -134,7 +134,7 @@ var Day = function (_React$Component) {
                 } else {
                     return React.createElement(
                         'div',
-                        { onClick: this.handleClick },
+                        { className: 'col day', onClick: this.handleClick },
                         React.createElement(
                             'p',
                             null,
@@ -214,81 +214,25 @@ var Forcast = function (_React$Component2) {
                     return React.createElement(
                         'div',
                         { className: 'row forcast', id: 'forcast' },
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(0, 2) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(2, 4) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(4, 6) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(6, 8) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(8, 10) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(10, 12) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(12) })
-                        )
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(0, 2) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(2, 4) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(4, 6) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(6, 8) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(8, 10) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(10, 12) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(12) })
                     );
                 } else {
                     return React.createElement(
                         'div',
                         { className: 'row forcast', id: 'forcast' },
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: [results[0]] })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(1, 3) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(3, 5) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(5, 7) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(7, 9) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(9, 11) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(11, 13) })
-                        )
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: [results[0]] }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(1, 3) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(3, 5) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(5, 7) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(7, 9) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(9, 11) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(11, 13) })
                     );
                 }
             } else {
@@ -553,26 +497,10 @@ var Period = function (_React$Component5) {
     _createClass(Period, [{
         key: 'render',
         value: function render() {
-<<<<<<< HEAD
             if (this.props.length === 1) {
                 return React.createElement(
                     'div',
-                    { className: 'col day', onClick: this.props.handleClick.bind(this, this.props.index) },
-=======
-
-            return React.createElement(
-                'div',
-                { className: 'col day', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
-                React.createElement(
-                    'p',
-                    null,
-                    this.props.doyToDate(this.props.data[0]["day"])
-                ),
-                React.createElement(
-                    'p',
-                    null,
-                    'Average temp: ',
->>>>>>> 5e1dfb38f0e2fea6bd1c319767d04dce66f925db
+                    { className: 'col day', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
                     React.createElement(
                         'p',
                         null,
@@ -600,7 +528,7 @@ var Period = function (_React$Component5) {
             } else {
                 return React.createElement(
                     'div',
-                    { className: 'col day', onClick: this.props.handleClick.bind(this, this.props.index) },
+                    { className: 'col day', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
                     React.createElement(
                         'p',
                         null,
@@ -687,7 +615,7 @@ var Periods = function (_React$Component6) {
             if (this.props.results.length <= 0) {
                 return React.createElement(
                     'p',
-                    { 'class': 'aligncenter' },
+                    { className: 'aligncenter' },
                     'No results found. Try a different temperature.'
                 );
             } else {
