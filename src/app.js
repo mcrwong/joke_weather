@@ -305,7 +305,7 @@ class Periods extends React.Component {
             {
                 sum += iresults[i].temperature;
             }
-            sum = sum / iresults.length;
+            sum = Math.round(sum / iresults.length);
 
             return(
                 <Period key={index} length={iresults.length} sum={sum} data={iresults} index={index} unitconvert={this.props.unitconvert} unit={this.props.unit} handleClick={this.props.handleClick} doyToDate={this.doyToDate}/>

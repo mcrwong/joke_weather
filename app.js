@@ -515,7 +515,7 @@ var Periods = function (_React$Component6) {
                 for (var i = 0; i < iresults.length; i++) {
                     sum += iresults[i].temperature;
                 }
-                sum = sum / iresults.length;
+                sum = Math.round(sum / iresults.length);
 
                 return React.createElement(Period, { key: index, length: iresults.length, sum: sum, data: iresults, index: index, unitconvert: this.props.unitconvert, unit: this.props.unit, handleClick: this.props.handleClick, doyToDate: this.doyToDate });
             }
@@ -569,7 +569,7 @@ var Periods = function (_React$Component6) {
                             { className: 'container' },
                             React.createElement(
                                 'div',
-                                { className: 'row forcast scroll' },
+                                { className: 'row scroll' },
                                 extperiod
                             )
                         )
@@ -580,13 +580,8 @@ var Periods = function (_React$Component6) {
                         { className: 'container' },
                         React.createElement(
                             'div',
-<<<<<<< HEAD
                             { className: 'row forcast' },
                             periods
-=======
-                            { className: 'row scroll' },
-                            extperiod
->>>>>>> 769619168a1be4e11e546cf15167e6ccc89854fe
                         )
                     );
                 }
