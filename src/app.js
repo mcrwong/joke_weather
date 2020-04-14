@@ -345,7 +345,7 @@ class Periods extends React.Component {
                         </div>
                     </div>
                     <div className="container">
-                        <div className  ="row forcast scroll">
+                        <div className  ="row scroll">
                             {extperiod}    
                         </div>
                     </div>
