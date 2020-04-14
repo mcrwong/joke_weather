@@ -271,7 +271,7 @@ class Period extends React.Component {
             <div className="col day" onClick={this.props.handleClick.bind(this, this.props.index)}>
                 <p>{this.props.doyToDate(this.props.data[0]["day"])}</p>
                 <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
-                <p>Period Length: {this.props.length}</p>
+                <p>Period Length: {this.props.length} days</p>
             </div> 
         )
     }
@@ -316,7 +316,7 @@ class Periods extends React.Component {
 
     displayDay(day) {
         return(
-            <ExtendedPeriod key={day["day"]} day={this.doyToDate(day["day"])} temperature={this.props.unitconvert(day.temperature)}/>
+            <ExtendedPeriod key={day["day"]} day={this.doyToDate(day["day"])} temperature={this.props.unitconvert(day.temperature)} unit={this.props.unit}/>
         )
     }
 

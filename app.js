@@ -299,7 +299,6 @@ var App = function (_React$Component3) {
     }, {
         key: 'createPeriods',
         value: function createPeriods() {
-            console.log("changing periods");
             var daysAfterToday = [];
             for (var key in this.state.info) {
                 if (parseInt(key) > this.state.today) daysAfterToday.push(this.state.info[key].avg);
@@ -474,7 +473,8 @@ var Period = function (_React$Component5) {
                     'p',
                     null,
                     'Period Length: ',
-                    this.props.length
+                    this.props.length,
+                    ' days'
                 )
             );
         }
@@ -529,14 +529,13 @@ var Periods = function (_React$Component6) {
     }, {
         key: 'displayDay',
         value: function displayDay(day) {
-            return React.createElement(ExtendedPeriod, { key: day["day"], day: this.doyToDate(day["day"]), temperature: this.props.unitconvert(day.temperature) });
+            return React.createElement(ExtendedPeriod, { key: day["day"], day: this.doyToDate(day["day"]), temperature: this.props.unitconvert(day.temperature), unit: this.props.unit });
         }
     }, {
         key: 'render',
         value: function render() {
             var _this8 = this;
 
-            console.log("rerendering periods");
             if (this.props.results.length <= 0) {
                 return React.createElement(
                     'p',
@@ -548,7 +547,6 @@ var Periods = function (_React$Component6) {
                     return _this8.displayData(period, index);
                 });
                 if (Array.isArray(this.props.extension) && this.props.extension.length > 0) {
-                    console.log(this.props.extension.length);
                     var extperiod = this.props.extension.map(function (day) {
                         return _this8.displayDay(day);
                     });
