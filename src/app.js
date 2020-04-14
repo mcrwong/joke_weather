@@ -244,7 +244,7 @@ class ExtendedPeriod extends React.Component{
 
     render(){
         return(
-            <div className="col day">
+            <div className="col day scroll-block">
                 {this.props.day}
                 <br></br>
                 {this.props.temperature}
@@ -258,21 +258,12 @@ class Period extends React.Component {
         super(props)
     }
 
-    doyToDate(doy) {
-        var d = new Date();
-        d.setMonth(0);
-        d.setDate(1);
-        d.setDate(doy);
-        var months = ["January ", "February ", "March ", "April ", "May ", "June ", "July ", "August ", "September ", "October ", "November ", "December "];
-        return (months[d.getMonth()].concat(d.getDate().toString(), " ", d.getFullYear().toString()));
-    }
-
     render() {
 
 
         return(
-            <div className="col day">
-                <p>{this.doyToDate(this.props.data[0]["day"])}</p>
+            <div className="col day" onClick={this.props.handleClick.bind(this, this.props.index)}>
+                <p>{this.props.doyToDate(this.props.data[0]["day"])}</p>
                 <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
                 <p>Period Length: {this.props.length}</p>
             </div> 
@@ -287,10 +278,28 @@ class Periods extends React.Component {
         this.state = {
             extension: []
         }
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
         this.props.createPeriods()
+    }
+
+    handleClick(index, event){
+        console.log(index)
+        const period = this.props.results[index]
+        console.log(period)
+        this.setState({ extension: period })
+        console.log(this.state.extension)
+    }
+
+    doyToDate(doy) {
+        var d = new Date();
+        d.setMonth(0);
+        d.setDate(1);
+        d.setDate(doy);
+        var months = ["January ", "February ", "March ", "April ", "May ", "June ", "July ", "August ", "September ", "October ", "November ", "December "];
+        return (months[d.getMonth()].concat(d.getDate().toString(), " ", d.getFullYear().toString()));
     }
 
     displayData(iresults, index) {
@@ -305,13 +314,18 @@ class Periods extends React.Component {
             console.log("period avg: ", sum);
 
             return(
-                <Period key={index} length={iresults.length} sum={sum} data={iresults} unitconvert={this.props.unitconvert} unit={this.props.unit}/>
+                <Period key={index} length={iresults.length} sum={sum} data={iresults} index={index} unitconvert={this.props.unitconvert} unit={this.props.unit} handleClick={this.handleClick} doyToDate={this.doyToDate}/>
             );
         }
 
         return(<p>No information found</p>)
     }
 
+    displayDay(day) {
+        return(
+            <ExtendedPeriod key={day["day"]} day={this.doyToDate(day["day"])} temperature={this.props.unitconvert(day.temperature)}/>
+        )
+    }
 
     render() {
         console.log("rerendering periods")
@@ -319,13 +333,34 @@ class Periods extends React.Component {
         const periods = this.props.results.map((period, index) =>
         this.displayData(period, index)
         )
-        return (
-            <div className="container">
-                <div className  ="row forcast">
-                    {periods}    
+        if(Array.isArray(this.state.extension) && this.state.extension.length > 0){
+            const extperiod = this.state.extension.map((day) => 
+            this.displayDay(day)
+            )
+            return (
+                <div>
+                    <div className="container">
+                        <div className  ="row forcast">
+                            {periods}    
+                        </div>
+                    </div>
+                    <div className="container">
+                        <div className  ="row forcast scroll">
+                            {extperiod}    
+                        </div>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
+        else{
+            return (
+                <div className="container">
+                    <div className  ="row forcast">
+                        {periods}    
+                    </div>
+                </div>
+            )
+        }
     }
 }
 

@@ -58,3 +58,13 @@ img {
 .day {
     border: 2px solid black;
 }
+
+.scroll {
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+.scroll-block {
+    display: inline-block;
+    float: none;
+}

@@ -418,7 +418,7 @@ var ExtendedPeriod = function (_React$Component4) {
         value: function render() {
             return React.createElement(
                 'div',
-                { className: 'col day' },
+                { className: 'col day scroll-block' },
                 this.props.day,
                 React.createElement('br', null),
                 this.props.temperature
@@ -439,26 +439,16 @@ var Period = function (_React$Component5) {
     }
 
     _createClass(Period, [{
-        key: 'doyToDate',
-        value: function doyToDate(doy) {
-            var d = new Date();
-            d.setMonth(0);
-            d.setDate(1);
-            d.setDate(doy);
-            var months = ["January ", "February ", "March ", "April ", "May ", "June ", "July ", "August ", "September ", "October ", "November ", "December "];
-            return months[d.getMonth()].concat(d.getDate().toString(), " ", d.getFullYear().toString());
-        }
-    }, {
         key: 'render',
         value: function render() {
 
             return React.createElement(
                 'div',
-                { className: 'col day' },
+                { className: 'col day', onClick: this.props.handleClick.bind(this, this.props.index) },
                 React.createElement(
                     'p',
                     null,
-                    this.doyToDate(this.props.data[0]["day"])
+                    this.props.doyToDate(this.props.data[0]["day"])
                 ),
                 React.createElement(
                     'p',
@@ -495,6 +485,7 @@ var Periods = function (_React$Component6) {
         _this7.state = {
             extension: []
         };
+        _this7.handleClick = _this7.handleClick.bind(_this7);
         return _this7;
     }
 
@@ -502,6 +493,25 @@ var Periods = function (_React$Component6) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             this.props.createPeriods();
+        }
+    }, {
+        key: 'handleClick',
+        value: function handleClick(index, event) {
+            console.log(index);
+            var period = this.props.results[index];
+            console.log(period);
+            this.setState({ extension: period });
+            console.log(this.state.extension);
+        }
+    }, {
+        key: 'doyToDate',
+        value: function doyToDate(doy) {
+            var d = new Date();
+            d.setMonth(0);
+            d.setDate(1);
+            d.setDate(doy);
+            var months = ["January ", "February ", "March ", "April ", "May ", "June ", "July ", "August ", "September ", "October ", "November ", "December "];
+            return months[d.getMonth()].concat(d.getDate().toString(), " ", d.getFullYear().toString());
         }
     }, {
         key: 'displayData',
@@ -514,7 +524,7 @@ var Periods = function (_React$Component6) {
                 sum = sum / iresults.length;
                 console.log("period avg: ", sum);
 
-                return React.createElement(Period, { key: index, length: iresults.length, sum: sum, data: iresults, unitconvert: this.props.unitconvert, unit: this.props.unit });
+                return React.createElement(Period, { key: index, length: iresults.length, sum: sum, data: iresults, index: index, unitconvert: this.props.unitconvert, unit: this.props.unit, handleClick: this.handleClick, doyToDate: this.doyToDate });
             }
 
             return React.createElement(
@@ -522,6 +532,11 @@ var Periods = function (_React$Component6) {
                 null,
                 'No information found'
             );
+        }
+    }, {
+        key: 'displayDay',
+        value: function displayDay(day) {
+            return React.createElement(ExtendedPeriod, { key: day["day"], day: this.doyToDate(day["day"]), temperature: this.props.unitconvert(day.temperature) });
         }
     }, {
         key: 'render',
@@ -533,15 +548,43 @@ var Periods = function (_React$Component6) {
             var periods = this.props.results.map(function (period, index) {
                 return _this8.displayData(period, index);
             });
-            return React.createElement(
-                'div',
-                { className: 'container' },
-                React.createElement(
+            if (Array.isArray(this.state.extension) && this.state.extension.length > 0) {
+                var extperiod = this.state.extension.map(function (day) {
+                    return _this8.displayDay(day);
+                });
+                return React.createElement(
                     'div',
-                    { className: 'row forcast' },
-                    periods
-                )
-            );
+                    null,
+                    React.createElement(
+                        'div',
+                        { className: 'container' },
+                        React.createElement(
+                            'div',
+                            { className: 'row forcast' },
+                            periods
+                        )
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'container' },
+                        React.createElement(
+                            'div',
+                            { className: 'row forcast scroll' },
+                            extperiod
+                        )
+                    )
+                );
+            } else {
+                return React.createElement(
+                    'div',
+                    { className: 'container' },
+                    React.createElement(
+                        'div',
+                        { className: 'row forcast' },
+                        periods
+                    )
+                );
+            }
         }
     }]);
 
