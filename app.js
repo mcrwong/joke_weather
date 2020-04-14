@@ -374,21 +374,46 @@ Date.prototype.getDOY = function () {
     return dayOfYear;
 };
 
+var ExtendedPeriod = function (_ReactComponent) {
+    _inherits(ExtendedPeriod, _ReactComponent);
+
+    function ExtendedPeriod(props) {
+        _classCallCheck(this, ExtendedPeriod);
+
+        return _possibleConstructorReturn(this, (ExtendedPeriod.__proto__ || Object.getPrototypeOf(ExtendedPeriod)).call(this, props));
+    }
+
+    _createClass(ExtendedPeriod, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                { className: 'col day' },
+                this.props.day,
+                React.createElement('br', null),
+                this.props.temperature
+            );
+        }
+    }]);
+
+    return ExtendedPeriod;
+}(ReactComponent);
+
 var Periods = function (_React$Component4) {
     _inherits(Periods, _React$Component4);
 
     function Periods(props) {
         _classCallCheck(this, Periods);
 
-        var _this5 = _possibleConstructorReturn(this, (Periods.__proto__ || Object.getPrototypeOf(Periods)).call(this, props));
+        var _this6 = _possibleConstructorReturn(this, (Periods.__proto__ || Object.getPrototypeOf(Periods)).call(this, props));
 
-        _this5.state = {
+        _this6.state = {
             results: [],
             today: Date.prototype.getDOY(),
             info: avg_temps
         };
-        _this5.createPeriods = _this5.createPeriods.bind(_this5);
-        return _this5;
+        _this6.createPeriods = _this6.createPeriods.bind(_this6);
+        return _this6;
     }
 
     _createClass(Periods, [{
