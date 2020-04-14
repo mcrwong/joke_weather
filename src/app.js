@@ -42,7 +42,7 @@ class Day extends React.Component {
         if(this.state.clicked){
             if (this.props.data.length === 1) {
                 return (
-                    <div className="col day border" onClick={this.handleClick}>
+                    <div className="col day onhover border" onClick={this.handleClick}>
                         <p>{this.props.data[0].name}</p>
                         <p>{this.getDate(this.props.data[0].startTime)}</p>
                         <img src={this.props.data[0].icon}></img>
@@ -52,7 +52,7 @@ class Day extends React.Component {
             }
             else {
                 return (
-                    <div className="col day border" onClick={this.handleClick}>
+                    <div className="col day onhover border" onClick={this.handleClick}>
                         <p>{this.props.data[0].name}</p>
                         <p>{this.getDate(this.props.data[0].startTime)}</p>
                         <img src={this.props.data[0].icon}></img>
@@ -65,7 +65,7 @@ class Day extends React.Component {
         else{
             if (this.props.data.length === 1) {
                 return (
-                    <div className="col day" onClick={this.handleClick}>
+                    <div className="col onhover day" onClick={this.handleClick}>
                         <p>{this.props.data[0].name}</p>
                         <p>{this.getDate(this.props.data[0].startTime)}</p>
                         <img src={this.props.data[0].icon}></img>
@@ -75,7 +75,7 @@ class Day extends React.Component {
             }
             else {
                 return (
-                    <div className="col day" onClick={this.handleClick}>
+                    <div className="col onhover day" onClick={this.handleClick}>
                         <p>{this.props.data[0].name}</p>
                         <p>{this.getDate(this.props.data[0].startTime)}</p>
                         <img src={this.props.data[0].icon}></img>
