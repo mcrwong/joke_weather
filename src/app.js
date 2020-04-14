@@ -272,7 +272,7 @@ class Period extends React.Component {
     render() {
         if(this.props.length === 1){
             return(
-                <div className="col day" onClick={this.props.handleClick.bind(this, this.props.index)}>
+                <div className="col day" id = "period" onClick={this.props.handleClick.bind(this, this.props.index)}>
                     <p>{this.props.doyToDate(this.props.data[0]["day"])}</p>
                     <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
                     <p>Period Length: {this.props.length} day</p>
@@ -281,7 +281,7 @@ class Period extends React.Component {
         }
         else{
             return(
-                <div className="col day" onClick={this.props.handleClick.bind(this, this.props.index)}>
+                <div className="col day" id = "period" onClick={this.props.handleClick.bind(this, this.props.index)}>
                     <p>{this.props.doyToDate(this.props.data[0]["day"])}</p>
                     <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
                     <p>Period Length: {this.props.length} days</p>
