@@ -478,26 +478,10 @@ var Period = function (_React$Component5) {
     _createClass(Period, [{
         key: 'render',
         value: function render() {
-<<<<<<< HEAD
             if (this.props.length === 1) {
                 return React.createElement(
                     'div',
-                    { className: 'col day', onClick: this.props.handleClick.bind(this, this.props.index) },
-=======
-
-            return React.createElement(
-                'div',
-                { className: 'col day', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
-                React.createElement(
-                    'p',
-                    null,
-                    this.props.doyToDate(this.props.data[0]["day"])
-                ),
-                React.createElement(
-                    'p',
-                    null,
-                    'Average temp: ',
->>>>>>> 5e1dfb38f0e2fea6bd1c319767d04dce66f925db
+                    { className: 'col day', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
                     React.createElement(
                         'p',
                         null,
@@ -525,7 +509,7 @@ var Period = function (_React$Component5) {
             } else {
                 return React.createElement(
                     'div',
-                    { className: 'col day', onClick: this.props.handleClick.bind(this, this.props.index) },
+                    { className: 'col day', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
                     React.createElement(
                         'p',
                         null,
@@ -612,7 +596,7 @@ var Periods = function (_React$Component6) {
             if (this.props.results.length <= 0) {
                 return React.createElement(
                     'p',
-                    { 'class': 'aligncenter' },
+                    { className: 'aligncenter' },
                     'No results found. Try a different temperature.'
                 );
             } else {
