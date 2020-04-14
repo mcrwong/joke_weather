@@ -78,7 +78,7 @@ class Forcast extends React.Component {
         if (results.length > 0) {
             if (results[0].isDaytime) {
                 return (
-                    <div className="row" id="forcast">
+                    <div className="row forcast" id="forcast">
                         <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(0, 2)} /></div>
                         <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(2, 4)} /></div>
                         <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(4, 6)} /></div>
@@ -91,7 +91,7 @@ class Forcast extends React.Component {
             }
             else {
                 return (
-                    <div className="row" id="forcast">
+                    <div className="row forcast" id="forcast">
                         <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={[results[0]]} /></div>
                         <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(1, 3)} /></div>
                         <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(3, 5)} /></div>
@@ -133,22 +133,21 @@ class App extends React.Component {
         this.createPeriods = this.createPeriods.bind(this);
     }
 
-    handleInput(event) {
+
+    handleInput = (event) => {
         if (event.target.value <= 500 && event.target.value >= -100) {
-            this.setState({ input_temp: event.target.value });
+            this.setState({ input_temp: event.target.value }, this.createPeriods);
         }
         else if (event.target.value > 500) {
-            this.setState({ input_temp: 500 })
+            this.setState({ input_temp: 500 }, this.createPeriods);
         }
         else if (event.target.value < -100) {
-            this.setState({ input_temp: -100 })
+            this.setState({ input_temp: -100 }, this.createPeriods);
         }
-        this.createPeriods();
     }
 
-    handleUnit(event) {
-        this.setState({ input_unit: event.target.value });
-        this.createPeriods();
+    handleUnit = (event) => {
+        this.setState({ input_unit: event.target.value }, this.createPeriods);
     }
 
 
@@ -168,6 +167,8 @@ class App extends React.Component {
 
     createPeriods() {
         console.log("changing periods")
+        console.log(this.state.input_temp)
+        console.log(this.state.input_unit)
         var daysAfterToday = [];
         for (var key in this.state.info) {
             if (parseInt(key) > this.state.today)
@@ -179,8 +180,8 @@ class App extends React.Component {
         var i = 0;
         while (i < daysAfterToday.length) {
             var period = []
-            if (daysAfterToday[i] > this.state.input_temp) {
-                while (daysAfterToday[i] > this.state.input_temp) {
+            if (this.unitconvert(daysAfterToday[i]) > this.state.input_temp) {
+                while (this.unitconvert(daysAfterToday[i]) > this.state.input_temp) {
                     var day = todayNum + i;
                     period.push({ day: (todayNum + i), temperature: daysAfterToday[i] });
                     i++;
@@ -236,19 +237,11 @@ Date.prototype.getDOY = function () {
     return dayOfYear;
 };
 
-class Periods extends React.Component {
+
+class Period extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            results: this.props.results
-        }
     }
-
-    componentDidMount() {
-        this.props.createPeriods()
-        console.log(this.state.results)
-    }
-
 
     doyToDate(doy) {
         var d = new Date();
@@ -256,46 +249,66 @@ class Periods extends React.Component {
         d.setDate(1);
         d.setDate(doy);
         var months = ["January ", "February ", "March ", "April ", "May ", "June ", "July ", "August ", "September ", "October ", "November ", "December "];
-
-
         return (months[d.getMonth()].concat(d.getDate().toString(), " ", d.getFullYear().toString()));
     }
 
-    displayData(results) {
-        var period_avgs = [];
-        if (this.state.results.length > 0)
+    render() {
+
+
+        return(
+            <div className="col day">
+                <p>{this.doyToDate(this.props.data[0]["day"])}</p>
+                <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
+                <p>Period Length: {this.props.length}</p>
+            </div> 
+        )
+    }
+}
+
+
+class Periods extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            extension: []
+        }
+    }
+
+    componentDidMount() {
+        this.props.createPeriods()
+    }
+
+    displayData(iresults, index) {
+        var sum = 0;
+        if (iresults.length > 0)
         {
-            for (var i = 0; i < this.state.results.length; i++)
+            for (var i = 0; i < iresults.length; i++)
             {
-                var sum = 0;
-                for (var j = 0; j < this.state.results[i].length; j++)
-                {
-                    sum += this.state.results[i][j].temperature;
-                }
-                sum = sum / this.state.results[i].length; 
-                period_avgs.push(sum);
-                console.log("period avg: ", i, " ", sum);
+                sum += iresults[i].temperature;
             }
+            sum = sum / iresults.length;
+            console.log("period avg: ", sum);
+
+            return(
+                <Period key={index} length={iresults.length} sum={sum} data={iresults} unitconvert={this.props.unitconvert} unit={this.props.unit}/>
+            );
         }
 
-        /*return(
-            <div>
-                <div className="periodOfDays">{this.displayData( this.state.results )}{this.displayData( this.state.results )}
-                    {period_avgs.map(period => <p key={period}>{period[0]["day"]}</p>)}
-
-                </div>    
-            </div>
-
-        );*/
+        return(<p>No information found</p>)
     }
 
 
     render() {
         console.log("rerendering periods")
+        console.log(this.props.results)
+        const periods = this.props.results.map((period, index) =>
+        this.displayData(period, index)
+        )
         return (
-            <div>
-                <p> input_tmp: {this.props.input_temp}, day#: {this.props.today}, date: {this.doyToDate(this.props.today)}</p>
-                {this.displayData( this.state.results )}
+            <div className="container">
+                <div className  ="row forcast">
+                    {periods}    
+                </div>
             </div>
         )
     }
