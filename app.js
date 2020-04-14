@@ -464,7 +464,7 @@ var Period = function (_React$Component5) {
 
             return React.createElement(
                 'div',
-                { className: 'col day', onClick: this.props.handleClick.bind(this, this.props.index) },
+                { className: 'col day', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
                 React.createElement(
                     'p',
                     null,
