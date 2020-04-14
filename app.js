@@ -438,10 +438,27 @@ var ExtendedPeriod = function (_React$Component4) {
                 { className: 'col day scroll-block aligncenter' },
                 this.props.day,
                 React.createElement('br', null),
-                'Avg Temp: ',
-                this.props.temperature,
-                ' ',
-                this.props.unit
+                React.createElement(
+                    'p',
+                    null,
+                    'High temp: ',
+                    this.props.high,
+                    this.props.unit
+                ),
+                React.createElement(
+                    'p',
+                    null,
+                    'Avg Temp: ',
+                    this.props.temperature,
+                    this.props.unit
+                ),
+                React.createElement(
+                    'p',
+                    null,
+                    'Low temp: ',
+                    this.props.low,
+                    this.props.unit
+                )
             );
         }
     }]);
@@ -461,34 +478,63 @@ var Period = function (_React$Component5) {
     _createClass(Period, [{
         key: 'render',
         value: function render() {
-
-            return React.createElement(
-                'div',
-                { className: 'col day', onClick: this.props.handleClick.bind(this, this.props.index) },
-                React.createElement(
-                    'p',
-                    null,
-                    this.props.doyToDate(this.props.data[0]["day"])
-                ),
-                React.createElement(
-                    'p',
-                    null,
-                    'Average temp: ',
+            if (this.props.length === 1) {
+                return React.createElement(
+                    'div',
+                    { className: 'col day', onClick: this.props.handleClick.bind(this, this.props.index) },
                     React.createElement(
-                        'b',
+                        'p',
                         null,
-                        this.props.unitconvert(this.props.sum),
-                        this.props.unit
+                        this.props.doyToDate(this.props.data[0]["day"])
+                    ),
+                    React.createElement(
+                        'p',
+                        null,
+                        'Average temp: ',
+                        React.createElement(
+                            'b',
+                            null,
+                            this.props.unitconvert(this.props.sum),
+                            this.props.unit
+                        )
+                    ),
+                    React.createElement(
+                        'p',
+                        null,
+                        'Period Length: ',
+                        this.props.length,
+                        ' day'
                     )
-                ),
-                React.createElement(
-                    'p',
-                    null,
-                    'Period Length: ',
-                    this.props.length,
-                    ' days'
-                )
-            );
+                );
+            } else {
+                return React.createElement(
+                    'div',
+                    { className: 'col day', onClick: this.props.handleClick.bind(this, this.props.index) },
+                    React.createElement(
+                        'p',
+                        null,
+                        this.props.doyToDate(this.props.data[0]["day"])
+                    ),
+                    React.createElement(
+                        'p',
+                        null,
+                        'Average temp: ',
+                        React.createElement(
+                            'b',
+                            null,
+                            this.props.unitconvert(this.props.sum),
+                            this.props.unit
+                        )
+                    ),
+                    React.createElement(
+                        'p',
+                        null,
+                        'Period Length: ',
+                        this.props.length,
+                        ' days'
+                    )
+                );
+            }
         }
     }]);
 
@@ -540,7 +586,7 @@ var Periods = function (_React$Component6) {
     }, {
         key: 'displayDay',
         value: function displayDay(day) {
-            return React.createElement(ExtendedPeriod, { key: day["day"], day: this.doyToDate(day["day"]), temperature: this.props.unitconvert(day.temperature), unit: this.props.unit });
+            return React.createElement(ExtendedPeriod, { key: day["day"], high: this.props.unitconvert(this.props.info[day["day"] - 1]["high"]), low: this.props.unitconvert(this.props.info[day["day"] - 1]["low"]), day: this.doyToDate(day["day"]), temperature: this.props.unitconvert(day.temperature), unit: this.props.unit });
         }
     }, {
         key: 'render',
