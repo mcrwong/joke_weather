@@ -459,25 +459,21 @@ var Periods = function (_React$Component4) {
                 }
             }
 
-            return;
-            React.createElement(
+            return React.createElement(
                 'div',
                 null,
                 React.createElement(
                     'div',
                     { className: 'periodOfDays' },
-                    this.doyToDate(104),
-                    React.createElement(
-                        'ul',
-                        null,
-                        this.state.results.map(function (period) {
-                            return React.createElement(
-                                'li',
-                                null,
-                                period
-                            );
-                        })
-                    )
+                    this.displayData(this.state.results),
+                    this.displayData(this.state.results),
+                    period_avgs.map(function (period) {
+                        return React.createElement(
+                            'p',
+                            { key: period[0]["day"] },
+                            period[0]["day"]
+                        );
+                    })
                 )
             );
         }
@@ -487,7 +483,6 @@ var Periods = function (_React$Component4) {
             return React.createElement(
                 'div',
                 null,
-                React.createElement('div', null),
                 React.createElement(
                     'p',
                     null,
@@ -496,11 +491,9 @@ var Periods = function (_React$Component4) {
                     ', day#: ',
                     this.state.today,
                     ', date: ',
-                    this.doyToDate(this.state.today),
-                    ', template: ',
-                    this.displayData(this.state.results),
-                    ' '
-                )
+                    this.doyToDate(this.state.today)
+                ),
+                this.displayData(this.state.results)
             );
         }
     }]);

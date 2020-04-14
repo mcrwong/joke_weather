@@ -284,17 +284,10 @@ class Periods extends React.Component {
             }
         }
 
-
-
-        return
-        (
+        return(
             <div>
-                <div className="periodOfDays">
-                    {this.doyToDate(104)}
-
-                    <ul>
-                        {this.state.results.map(period => <li>{period}</li>)}
-                    </ul>
+                <div className="periodOfDays">{this.displayData( this.state.results )}{this.displayData( this.state.results )}
+                    {period_avgs.map(period => <p key={period[0]["day"]}>{period[0]["day"]}</p>)}
 
                 </div>    
             </div>
@@ -306,10 +299,8 @@ class Periods extends React.Component {
     render() {
         return (
             <div>
-                <div></div>
-
-                <p> input_tmp: {this.props.input_temp}, day#: {this.state.today}, date: {this.doyToDate(this.state.today)}, template: {this.displayData( this.state.results )} </p>
-
+                <p> input_tmp: {this.props.input_temp}, day#: {this.state.today}, date: {this.doyToDate(this.state.today)}</p>
+                {this.displayData( this.state.results )}
             </div>
         )
     }
