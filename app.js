@@ -20,11 +20,29 @@ var Day = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Day.__proto__ || Object.getPrototypeOf(Day)).call(this, props));
 
+        _this.state = {
+            clicked: false
+        };
         _this.getDate = _this.getDate.bind(_this);
+        _this.handleClick = _this.handleClick.bind(_this);
+
         return _this;
     }
 
     _createClass(Day, [{
+        key: 'handleClick',
+        value: function handleClick() {
+            if (this.state.clicked) {
+                this.setState({
+                    clicked: false
+                });
+            } else {
+                this.setState({
+                    clicked: true
+                });
+            }
+        }
+    }, {
         key: 'getDate',
         value: function getDate(str) {
             var date = str.split("T");
@@ -34,59 +52,116 @@ var Day = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            if (this.props.data.length === 1) {
-                return React.createElement(
-                    'div',
-                    null,
-                    React.createElement(
-                        'p',
-                        null,
-                        this.props.data[0].name
-                    ),
-                    React.createElement(
-                        'p',
-                        null,
-                        this.getDate(this.props.data[0].startTime)
-                    ),
-                    React.createElement('img', { src: this.props.data[0].icon }),
-                    React.createElement(
-                        'p',
-                        null,
-                        'Current: ',
-                        this.props.unitconvert(this.props.data[0].temperature),
-                        this.props.unit
-                    )
-                );
+            if (this.state.clicked) {
+                if (this.props.data.length === 1) {
+                    return React.createElement(
+                        'div',
+                        { className: 'col day border', onClick: this.handleClick },
+                        React.createElement(
+                            'p',
+                            null,
+                            this.props.data[0].name
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            this.getDate(this.props.data[0].startTime)
+                        ),
+                        React.createElement('img', { src: this.props.data[0].icon }),
+                        React.createElement(
+                            'p',
+                            null,
+                            'Current: ',
+                            this.props.unitconvert(this.props.data[0].temperature),
+                            this.props.unit
+                        )
+                    );
+                } else {
+                    return React.createElement(
+                        'div',
+                        { className: 'col day border', onClick: this.handleClick },
+                        React.createElement(
+                            'p',
+                            null,
+                            this.props.data[0].name
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            this.getDate(this.props.data[0].startTime)
+                        ),
+                        React.createElement('img', { src: this.props.data[0].icon }),
+                        React.createElement(
+                            'p',
+                            { id: 'hightext' },
+                            'High: ',
+                            this.props.unitconvert(this.props.data[0].temperature),
+                            this.props.unit
+                        ),
+                        React.createElement(
+                            'p',
+                            { id: 'lowtext' },
+                            'Low: ',
+                            this.props.unitconvert(this.props.data[1].temperature),
+                            this.props.unit
+                        )
+                    );
+                }
             } else {
-                return React.createElement(
-                    'div',
-                    null,
-                    React.createElement(
-                        'p',
-                        null,
-                        this.props.data[0].name
-                    ),
-                    React.createElement(
-                        'p',
-                        null,
-                        this.getDate(this.props.data[0].startTime)
-                    ),
-                    React.createElement('img', { src: this.props.data[0].icon }),
-                    React.createElement(
-                        'p',
-                        { id: 'hightext' },
-                        'High: ',
-                        this.props.unitconvert(this.props.data[0].temperature),
-                        this.props.unit
-                    ),
-                    React.createElement(
-                        'p',
-                        { id: 'lowtext' },
-                        'Low: ',
-                        this.props.unitconvert(this.props.data[1].temperature),
-                        this.props.unit
-                    )
-                );
+                if (this.props.data.length === 1) {
+                    return React.createElement(
+                        'div',
+                        { className: 'col day', onClick: this.handleClick },
+                        React.createElement(
+                            'p',
+                            null,
+                            this.props.data[0].name
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            this.getDate(this.props.data[0].startTime)
+                        ),
+                        React.createElement('img', { src: this.props.data[0].icon }),
+                        React.createElement(
+                            'p',
+                            null,
+                            'Current: ',
+                            this.props.unitconvert(this.props.data[0].temperature),
+                            this.props.unit
+                        )
+                    );
+                } else {
+                    return React.createElement(
+                        'div',
+                        { className: 'col day', onClick: this.handleClick },
+                        React.createElement(
+                            'p',
+                            null,
+                            this.props.data[0].name
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            this.getDate(this.props.data[0].startTime)
+                        ),
+                        React.createElement('img', { src: this.props.data[0].icon }),
+                        React.createElement(
+                            'p',
+                            { id: 'hightext' },
+                            'High: ',
+                            this.props.unitconvert(this.props.data[0].temperature),
+                            this.props.unit
+                        ),
+                        React.createElement(
+                            'p',
+                            { id: 'lowtext' },
+                            'Low: ',
+                            this.props.unitconvert(this.props.data[1].temperature),
+                            this.props.unit
+                        )
+                    );
+                }
             }
             return React.createElement('div', null);
         }
@@ -139,81 +214,25 @@ var Forcast = function (_React$Component2) {
                     return React.createElement(
                         'div',
                         { className: 'row forcast', id: 'forcast' },
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(0, 2) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(2, 4) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(4, 6) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(6, 8) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(8, 10) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(10, 12) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(12) })
-                        )
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(0, 2) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(2, 4) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(4, 6) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(6, 8) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(8, 10) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(10, 12) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(12) })
                     );
                 } else {
                     return React.createElement(
                         'div',
                         { className: 'row forcast', id: 'forcast' },
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: [results[0]] })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(1, 3) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(3, 5) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(5, 7) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(7, 9) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(9, 11) })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col day' },
-                            React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(11, 13) })
-                        )
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: [results[0]] }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(1, 3) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(3, 5) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(5, 7) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(7, 9) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(9, 11) }),
+                        React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(11, 13) })
                     );
                 }
             } else {
