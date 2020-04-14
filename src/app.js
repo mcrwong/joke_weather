@@ -253,7 +253,7 @@ class ExtendedPeriod extends React.Component{
             <div className="col day scroll-block">
                 {this.props.day}
                 <br></br>
-                {this.props.temperature}
+                Avg Temp:{this.props.temperature} {this.props.unit}
             </div>
         )
     }

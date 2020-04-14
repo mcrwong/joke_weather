@@ -429,7 +429,10 @@ var ExtendedPeriod = function (_React$Component4) {
                 { className: 'col day scroll-block' },
                 this.props.day,
                 React.createElement('br', null),
-                this.props.temperature
+                'Avg Temp:',
+                this.props.temperature,
+                ' ',
+                this.props.unit
             );
         }
     }]);
