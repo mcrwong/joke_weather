@@ -518,7 +518,7 @@ var Periods = function (_React$Component6) {
                 for (var i = 0; i < iresults.length; i++) {
                     sum += iresults[i].temperature;
                 }
-                sum = sum / iresults.length;
+                sum = Math.round(sum / iresults.length);
 
                 return React.createElement(Period, { key: index, length: iresults.length, sum: sum, data: iresults, index: index, unitconvert: this.props.unitconvert, unit: this.props.unit, handleClick: this.props.handleClick, doyToDate: this.doyToDate });
             }
