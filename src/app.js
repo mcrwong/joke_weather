@@ -336,7 +336,7 @@ class Periods extends React.Component {
     render() {
         if(this.props.results.length <= 0){
             return(
-                <p class = "aligncenter">No results found. Try a different temperature.</p>
+                <p className="aligncenter">No results found. Try a different temperature.</p>
             )
         }
         else{
