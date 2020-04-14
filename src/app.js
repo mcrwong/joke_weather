@@ -206,10 +206,13 @@ class App extends React.Component {
         return (
             <div>
                 <div id="title-container" className="center">
-                    <h2 className="aligncenter" id="title">When is it Warm <img src="titleicon.png" id="titlepic"></img></h2>
-                    <p id="annarbor">...in Ann Arbor?</p>
+                    <h2 className="aligncenter" id="title">When is it Warm?<img src="titleicon.png" id="titlepic"></img></h2>
+                    <p id="annarbor">Ann Arbor, MI</p>
                 </div>
                 <div><Forcast unitconvert={this.unitconvert} unit={this.state.input_unit} /></div>
+                <div id = "inst-container" className = "center">
+                    <h3 className="aligncenter" id="inst">Enter a temperature below to view periods of Ann Arbor weather that satisfy your definition of warm. Click a period to see details about each day in the period.</h3>
+                </div>
                 <div className="center">
                     <p className="aligncenter">I think <input autoFocus type="number" id="temperature" value={this.state.input_temp} onChange={this.handleInput} />
                         <select value={this.state.input_unit} onChange={this.handleUnit}>
@@ -250,10 +253,10 @@ class ExtendedPeriod extends React.Component{
 
     render(){
         return(
-            <div className="col day scroll-block">
+            <div className="col day scroll-block aligncenter">
                 {this.props.day}
                 <br></br>
-                Avg Temp:{this.props.temperature} {this.props.unit}
+                Avg Temp: {this.props.temperature} {this.props.unit}
             </div>
         )
     }
@@ -322,7 +325,7 @@ class Periods extends React.Component {
     render() {
         if(this.props.results.length <= 0){
             return(
-                <p>No results found. Try a different temperature.</p>
+                <p class = "aligncenter">No results found. Try a different temperature.</p>
             )
         }
         else{

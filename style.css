@@ -1,5 +1,6 @@
 body {
-    background-color: #f9e6ba;
+    background-color: #e8ecef;
+    font-family: "Helvetica", sans-serif;
 }
 
 img {
@@ -7,34 +8,51 @@ img {
 }
 
 #titlepic {
+    width: 40px;
+    height: 40px;
     margin-left: 10px;
 }
 #title {
     text-align: center;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    margin-bottom: 0px;
+}
+#inst {
+    text-align: center;
+    font-size: 16px;
+    padding: 0px;
+
 }
 #title-container {
     position: relative;
     border: 3px solid;
-    border-color: #f2cd75;
-    background-color: #f5d997;
+    border-color: #d9e5ee;
+    background-color: #d9e5ee;
     margin-top: 10px;
     margin-bottom: 20px;
+    width: 900px;
+}
+#inst-container {
+    position: relative;
+    border: 3px solid;
+    border-color: #d9e5ee;
+    background-color: #d9e5ee;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 0px;
 }
 .center {
     margin: auto;
     width: 50%;
     padding: 10px;
-}
+} 
 .aligncenter {
     text-align: center;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 .forcast{
     display: flex;
     justify-content: center;
     text-align: center;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    padding: 5px;
 }
 
 .col {
@@ -43,20 +61,20 @@ img {
     margin: 0px 10px;
 }
 #hightext{
-    color: red;
+    color: #fb2728;
 }
 #lowtext {
-    color: blue;
+    color: #6162f8;
 }
 #annarbor {
-    font-style: italic;
     font-size: 16px;
     text-align: center;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
 .day {
-    border: 2px solid black;
+    border: 2px solid;
+    border-color: #92a7ba;
+    padding: 5px;
 }
 
 .scroll {
@@ -65,10 +83,13 @@ img {
     justify-content: flex-start;
     text-align: center;
     white-space: nowrap;
-    margin: 10px;
+    margin: 20px;
 }
 
 .scroll-block {
     display: inline-block;
     float: none;
+    border: dashed;
+    border-color: #92a7ba;
+    padding: 5px;
 }

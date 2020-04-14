@@ -336,19 +336,28 @@ var App = function (_React$Component3) {
                     React.createElement(
                         'h2',
                         { className: 'aligncenter', id: 'title' },
-                        'When is it Warm ',
+                        'When is it Warm?',
                         React.createElement('img', { src: 'titleicon.png', id: 'titlepic' })
                     ),
                     React.createElement(
                         'p',
                         { id: 'annarbor' },
-                        '...in Ann Arbor?'
+                        'Ann Arbor, MI'
                     )
                 ),
                 React.createElement(
                     'div',
                     null,
                     React.createElement(Forcast, { unitconvert: this.unitconvert, unit: this.state.input_unit })
+                ),
+                React.createElement(
+                    'div',
+                    { id: 'inst-container', className: 'center' },
+                    React.createElement(
+                        'h3',
+                        { className: 'aligncenter', id: 'inst' },
+                        'Enter a temperature below to view periods of Ann Arbor weather that satisfy your definition of warm. Click a period to see details about each day in the period.'
+                    )
                 ),
                 React.createElement(
                     'div',
@@ -426,10 +435,10 @@ var ExtendedPeriod = function (_React$Component4) {
         value: function render() {
             return React.createElement(
                 'div',
-                { className: 'col day scroll-block' },
+                { className: 'col day scroll-block aligncenter' },
                 this.props.day,
                 React.createElement('br', null),
-                'Avg Temp:',
+                'Avg Temp: ',
                 this.props.temperature,
                 ' ',
                 this.props.unit
@@ -541,7 +550,7 @@ var Periods = function (_React$Component6) {
             if (this.props.results.length <= 0) {
                 return React.createElement(
                     'p',
-                    null,
+                    { 'class': 'aligncenter' },
                     'No results found. Try a different temperature.'
                 );
             } else {
