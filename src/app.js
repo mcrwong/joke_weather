@@ -173,7 +173,6 @@ class App extends React.Component {
     }
 
     createPeriods() {
-        console.log("changing periods")
         var daysAfterToday = [];
         for (var key in this.state.info) {
             if (parseInt(key) > this.state.today)
@@ -322,7 +321,6 @@ class Periods extends React.Component {
     }
 
     render() {
-        console.log("rerendering periods")
         if(this.props.results.length <= 0){
             return(
                 <p>No results found. Try a different temperature.</p>
@@ -333,7 +331,6 @@ class Periods extends React.Component {
         this.displayData(period, index)
         )
         if(Array.isArray(this.props.extension) && this.props.extension.length > 0){
-            console.log(this.props.extension.length)
             const extperiod = this.props.extension.map((day) => 
             this.displayDay(day)
             )
