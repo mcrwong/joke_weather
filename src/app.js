@@ -125,14 +125,21 @@ class App extends React.Component {
             input_unit: 'F',
             today: Date.prototype.getDOY(),
             info: avg_temps,
-            results: []
+            results: [],
+            extension: []
         };
         this.handleInput = this.handleInput.bind(this);
         this.handleUnit = this.handleUnit.bind(this);
         this.unitconvert = this.unitconvert.bind(this);
         this.createPeriods = this.createPeriods.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
+    handleClick(index, event){
+        event.preventDefault();
+        const period = this.state.results[index]
+        this.setState({ extension: period })
+    }
 
     handleInput = (event) => {
         if (event.target.value <= 500 && event.target.value >= -100) {
@@ -167,8 +174,6 @@ class App extends React.Component {
 
     createPeriods() {
         console.log("changing periods")
-        console.log(this.state.input_temp)
-        console.log(this.state.input_unit)
         var daysAfterToday = [];
         for (var key in this.state.info) {
             if (parseInt(key) > this.state.today)
@@ -192,7 +197,10 @@ class App extends React.Component {
                 i++;
         }
 
-        this.setState({results: newResults});
+        this.setState({
+            results: newResults,
+            extension: []
+        });
     }
 
     render() {
@@ -211,7 +219,7 @@ class App extends React.Component {
                             <option value="K">K</option>
                         </select> is warm.</p>
                 </div>
-                <div><Periods unitconvert={this.unitconvert} unit={this.state.input_unit} input_temp={this.state.input_temp} createPeriods={this.createPeriods} today={this.state.today} info={this.state.info} results={this.state.results}/></div>
+                <div><Periods extension={this.state.extension} unitconvert={this.unitconvert} unit={this.state.input_unit} input_temp={this.state.input_temp} createPeriods={this.createPeriods} today={this.state.today} info={this.state.info} results={this.state.results} handleClick={this.handleClick}/></div>
             </div>
         );
     }
@@ -229,7 +237,6 @@ Date.prototype.isLeapYear = function () {
 Date.prototype.getDOY = function () {
     var dayCount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
     var today = new Date();
-    console.log(today);
     var mn = today.getMonth();
     var dn = today.getDate();
     var dayOfYear = dayCount[mn] + dn;
@@ -275,22 +282,10 @@ class Period extends React.Component {
 class Periods extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            extension: []
-        }
-        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
         this.props.createPeriods()
-    }
-
-    handleClick(index, event){
-        console.log(index)
-        const period = this.props.results[index]
-        console.log(period)
-        this.setState({ extension: period })
-        console.log(this.state.extension)
     }
 
     doyToDate(doy) {
@@ -311,10 +306,9 @@ class Periods extends React.Component {
                 sum += iresults[i].temperature;
             }
             sum = sum / iresults.length;
-            console.log("period avg: ", sum);
 
             return(
-                <Period key={index} length={iresults.length} sum={sum} data={iresults} index={index} unitconvert={this.props.unitconvert} unit={this.props.unit} handleClick={this.handleClick} doyToDate={this.doyToDate}/>
+                <Period key={index} length={iresults.length} sum={sum} data={iresults} index={index} unitconvert={this.props.unitconvert} unit={this.props.unit} handleClick={this.props.handleClick} doyToDate={this.doyToDate}/>
             );
         }
 
@@ -329,12 +323,12 @@ class Periods extends React.Component {
 
     render() {
         console.log("rerendering periods")
-        console.log(this.props.results)
         const periods = this.props.results.map((period, index) =>
         this.displayData(period, index)
         )
-        if(Array.isArray(this.state.extension) && this.state.extension.length > 0){
-            const extperiod = this.state.extension.map((day) => 
+        if(Array.isArray(this.props.extension) && this.props.extension.length > 0){
+            console.log(this.props.extension.length)
+            const extperiod = this.props.extension.map((day) => 
             this.displayDay(day)
             )
             return (

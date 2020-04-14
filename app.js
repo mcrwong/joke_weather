@@ -265,16 +265,25 @@ var App = function (_React$Component3) {
             input_unit: 'F',
             today: Date.prototype.getDOY(),
             info: avg_temps,
-            results: []
+            results: [],
+            extension: []
         };
         _this4.handleInput = _this4.handleInput.bind(_this4);
         _this4.handleUnit = _this4.handleUnit.bind(_this4);
         _this4.unitconvert = _this4.unitconvert.bind(_this4);
         _this4.createPeriods = _this4.createPeriods.bind(_this4);
+        _this4.handleClick = _this4.handleClick.bind(_this4);
         return _this4;
     }
 
     _createClass(App, [{
+        key: 'handleClick',
+        value: function handleClick(index, event) {
+            event.preventDefault();
+            var period = this.state.results[index];
+            this.setState({ extension: period });
+        }
+    }, {
         key: 'unitconvert',
         value: function unitconvert(number) {
             if (this.state.input_unit != 'F') {
@@ -291,8 +300,6 @@ var App = function (_React$Component3) {
         key: 'createPeriods',
         value: function createPeriods() {
             console.log("changing periods");
-            console.log(this.state.input_temp);
-            console.log(this.state.input_unit);
             var daysAfterToday = [];
             for (var key in this.state.info) {
                 if (parseInt(key) > this.state.today) daysAfterToday.push(this.state.info[key].avg);
@@ -313,7 +320,10 @@ var App = function (_React$Component3) {
                 } else i++;
             }
 
-            this.setState({ results: newResults });
+            this.setState({
+                results: newResults,
+                extension: []
+            });
         }
     }, {
         key: 'render',
@@ -374,7 +384,7 @@ var App = function (_React$Component3) {
                 React.createElement(
                     'div',
                     null,
-                    React.createElement(Periods, { unitconvert: this.unitconvert, unit: this.state.input_unit, input_temp: this.state.input_temp, createPeriods: this.createPeriods, today: this.state.today, info: this.state.info, results: this.state.results })
+                    React.createElement(Periods, { extension: this.state.extension, unitconvert: this.unitconvert, unit: this.state.input_unit, input_temp: this.state.input_temp, createPeriods: this.createPeriods, today: this.state.today, info: this.state.info, results: this.state.results, handleClick: this.handleClick })
                 )
             );
         }
@@ -396,7 +406,6 @@ Date.prototype.isLeapYear = function () {
 Date.prototype.getDOY = function () {
     var dayCount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
     var today = new Date();
-    console.log(today);
     var mn = today.getMonth();
     var dn = today.getDate();
     var dayOfYear = dayCount[mn] + dn;
@@ -480,28 +489,13 @@ var Periods = function (_React$Component6) {
     function Periods(props) {
         _classCallCheck(this, Periods);
 
-        var _this7 = _possibleConstructorReturn(this, (Periods.__proto__ || Object.getPrototypeOf(Periods)).call(this, props));
-
-        _this7.state = {
-            extension: []
-        };
-        _this7.handleClick = _this7.handleClick.bind(_this7);
-        return _this7;
+        return _possibleConstructorReturn(this, (Periods.__proto__ || Object.getPrototypeOf(Periods)).call(this, props));
     }
 
     _createClass(Periods, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
             this.props.createPeriods();
-        }
-    }, {
-        key: 'handleClick',
-        value: function handleClick(index, event) {
-            console.log(index);
-            var period = this.props.results[index];
-            console.log(period);
-            this.setState({ extension: period });
-            console.log(this.state.extension);
         }
     }, {
         key: 'doyToDate',
@@ -522,9 +516,8 @@ var Periods = function (_React$Component6) {
                     sum += iresults[i].temperature;
                 }
                 sum = sum / iresults.length;
-                console.log("period avg: ", sum);
 
-                return React.createElement(Period, { key: index, length: iresults.length, sum: sum, data: iresults, index: index, unitconvert: this.props.unitconvert, unit: this.props.unit, handleClick: this.handleClick, doyToDate: this.doyToDate });
+                return React.createElement(Period, { key: index, length: iresults.length, sum: sum, data: iresults, index: index, unitconvert: this.props.unitconvert, unit: this.props.unit, handleClick: this.props.handleClick, doyToDate: this.doyToDate });
             }
 
             return React.createElement(
@@ -544,12 +537,12 @@ var Periods = function (_React$Component6) {
             var _this8 = this;
 
             console.log("rerendering periods");
-            console.log(this.props.results);
             var periods = this.props.results.map(function (period, index) {
                 return _this8.displayData(period, index);
             });
-            if (Array.isArray(this.state.extension) && this.state.extension.length > 0) {
-                var extperiod = this.state.extension.map(function (day) {
+            if (Array.isArray(this.props.extension) && this.props.extension.length > 0) {
+                console.log(this.props.extension.length);
+                var extperiod = this.props.extension.map(function (day) {
                     return _this8.displayDay(day);
                 });
                 return React.createElement(
