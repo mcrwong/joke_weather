@@ -569,7 +569,7 @@ var Periods = function (_React$Component6) {
                         { className: 'container' },
                         React.createElement(
                             'div',
-                            { className: 'row forcast scroll' },
+                            { className: 'row scroll' },
                             extperiod
                         )
                     )
