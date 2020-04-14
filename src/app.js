@@ -175,7 +175,7 @@ class App extends React.Component {
     createPeriods() {
         var daysAfterToday = [];
         for (var key in this.state.info) {
-            if (parseInt(key) > this.state.today)
+            if (parseInt(key) >= this.state.today)
                 daysAfterToday.push(this.state.info[key].avg);
         }
         // create periods
@@ -290,8 +290,7 @@ class Periods extends React.Component {
     doyToDate(doy) {
         var d = new Date();
         d.setMonth(0);
-        d.setDate(1);
-        d.setDate(doy);
+        d.setDate(1 + doy);
         var months = ["January ", "February ", "March ", "April ", "May ", "June ", "July ", "August ", "September ", "October ", "November ", "December "];
         return (months[d.getMonth()].concat(d.getDate().toString(), " ", d.getFullYear().toString()));
     }
