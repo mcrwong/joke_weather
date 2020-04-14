@@ -78,7 +78,7 @@ class Forcast extends React.Component {
         if (results.length > 0) {
             if (results[0].isDaytime) {
                 return (
-                    <div className="row" id="forcast">
+                    <div className="row forcast" id="forcast">
                         <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(0, 2)} /></div>
                         <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(2, 4)} /></div>
                         <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(4, 6)} /></div>
@@ -91,7 +91,7 @@ class Forcast extends React.Component {
             }
             else {
                 return (
-                    <div className="row" id="forcast">
+                    <div className="row forcast" id="forcast">
                         <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={[results[0]]} /></div>
                         <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(1, 3)} /></div>
                         <div className="col day"><Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(3, 5)} /></div>
@@ -122,27 +122,32 @@ class App extends React.Component {
         super(props);
         this.state = {
             input_temp: 60,
-            input_unit: 'F'
+            input_unit: 'F',
+            today: Date.prototype.getDOY(),
+            info: avg_temps,
+            results: []
         };
         this.handleInput = this.handleInput.bind(this);
         this.handleUnit = this.handleUnit.bind(this);
         this.unitconvert = this.unitconvert.bind(this);
+        this.createPeriods = this.createPeriods.bind(this);
     }
 
-    handleInput(event) {
+
+    handleInput = (event) => {
         if (event.target.value <= 500 && event.target.value >= -100) {
-            this.setState({ input_temp: event.target.value });
+            this.setState({ input_temp: event.target.value }, this.createPeriods);
         }
         else if (event.target.value > 500) {
-            this.setState({ input_temp: 500 })
+            this.setState({ input_temp: 500 }, this.createPeriods);
         }
         else if (event.target.value < -100) {
-            this.setState({ input_temp: -100 })
+            this.setState({ input_temp: -100 }, this.createPeriods);
         }
     }
 
-    handleUnit(event) {
-        this.setState({ input_unit: event.target.value });
+    handleUnit = (event) => {
+        this.setState({ input_unit: event.target.value }, this.createPeriods);
     }
 
 
@@ -158,6 +163,36 @@ class App extends React.Component {
         else {
             return number
         }
+    }
+
+    createPeriods() {
+        console.log("changing periods")
+        console.log(this.state.input_temp)
+        console.log(this.state.input_unit)
+        var daysAfterToday = [];
+        for (var key in this.state.info) {
+            if (parseInt(key) > this.state.today)
+                daysAfterToday.push(this.state.info[key].avg);
+        }
+        // create periods
+        var todayNum = this.state.today;
+        var newResults = [];
+        var i = 0;
+        while (i < daysAfterToday.length) {
+            var period = []
+            if (this.unitconvert(daysAfterToday[i]) > this.state.input_temp) {
+                while (this.unitconvert(daysAfterToday[i]) > this.state.input_temp) {
+                    var day = todayNum + i;
+                    period.push({ day: (todayNum + i), temperature: daysAfterToday[i] });
+                    i++;
+                }
+                newResults.push(period);
+            }
+            else
+                i++;
+        }
+
+        this.setState({results: newResults});
     }
 
     render() {
@@ -176,7 +211,7 @@ class App extends React.Component {
                             <option value="K">K</option>
                         </select> is warm.</p>
                 </div>
-                <div><Periods unitconvert={this.unitconvert} unit={this.state.input_unit} input_temp={this.state.input_temp} /></div>
+                <div><Periods unitconvert={this.unitconvert} unit={this.state.input_unit} input_temp={this.state.input_temp} createPeriods={this.createPeriods} today={this.state.today} info={this.state.info} results={this.state.results}/></div>
             </div>
         );
     }
@@ -202,6 +237,7 @@ Date.prototype.getDOY = function () {
     return dayOfYear;
 };
 
+<<<<<<< HEAD
 class ExtendedPeriod extends ReactComponent{
     constructor(props){
         super(props)
@@ -219,57 +255,12 @@ class ExtendedPeriod extends ReactComponent{
 }
 
 class Periods extends React.Component {
+=======
+
+class Period extends React.Component {
+>>>>>>> 432e03b1f9318cf623dc87c9b227d3f8e003c858
     constructor(props) {
         super(props)
-        this.state = {
-            results: [],
-            today: Date.prototype.getDOY(),
-            info: avg_temps,
-        }
-        this.createPeriods = this.createPeriods.bind(this);
-    }
-
-    componentDidMount() {
-        let temp = this.createPeriods()
-        console.log(temp)
-        this.setState({
-            results: temp
-        })
-        console.log(this.state.results)
-    }
-
-
-    createPeriods() {
-        var daysAfterToday = [];
-        for (var key in this.state.info) {
-            if (parseInt(key) > this.state.today)
-                daysAfterToday.push(this.state.info[key].avg);
-        }
-        // create periods
-        var todayNum = this.state.today;
-        var newResults = [];
-        var i = 0;
-        while (i < daysAfterToday.length) {
-            var period = []
-            if (daysAfterToday[i] > this.props.input_temp) {
-                while (daysAfterToday[i] > this.props.input_temp) {
-                    var day = todayNum + i;
-                    period.push({ day: (todayNum + i), temperature: daysAfterToday[i] });
-                    i++;
-                }
-                console.log(period);
-                newResults.push(period);
-            }
-            else
-                i++;
-        }
-
-        return newResults;
-
-        //this.setState({
-        //    results: newResults,
-        //})
-        //console.log(this.state.results);
     }
 
     doyToDate(doy) {
@@ -278,45 +269,66 @@ class Periods extends React.Component {
         d.setDate(1);
         d.setDate(doy);
         var months = ["January ", "February ", "March ", "April ", "May ", "June ", "July ", "August ", "September ", "October ", "November ", "December "];
-
-
         return (months[d.getMonth()].concat(d.getDate().toString(), " ", d.getFullYear().toString()));
     }
 
-    displayData(results) {
-        var period_avgs = [];
-        if (this.state.results.length > 0)
-        {
-            for (var i = 0; i < this.state.results.length; i++)
-            {
-                var sum = 0;
-                for (var j = 0; j < this.state.results[i].length; j++)
-                {
-                    sum += this.state.results[i][j].temperature;
-                }
-                sum = sum / this.state.results[i].length; 
-                period_avgs.push(sum);
-                console.log("period avg: ", i, " ", sum);
-            }
-        }
+    render() {
+
 
         return(
-            <div>
-                <div className="periodOfDays">{this.displayData( this.state.results )}{this.displayData( this.state.results )}
-                    {period_avgs.map(period => <p key={period[0]["day"]}>{period[0]["day"]}</p>)}
+            <div className="col day">
+                <p>{this.doyToDate(this.props.data[0]["day"])}</p>
+                <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
+                <p>Period Length: {this.props.length}</p>
+            </div> 
+        )
+    }
+}
 
-                </div>    
-            </div>
 
-        );
+class Periods extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            extension: []
+        }
+    }
+
+    componentDidMount() {
+        this.props.createPeriods()
+    }
+
+    displayData(iresults, index) {
+        var sum = 0;
+        if (iresults.length > 0)
+        {
+            for (var i = 0; i < iresults.length; i++)
+            {
+                sum += iresults[i].temperature;
+            }
+            sum = sum / iresults.length;
+            console.log("period avg: ", sum);
+
+            return(
+                <Period key={index} length={iresults.length} sum={sum} data={iresults} unitconvert={this.props.unitconvert} unit={this.props.unit}/>
+            );
+        }
+
+        return(<p>No information found</p>)
     }
 
 
     render() {
+        console.log("rerendering periods")
+        console.log(this.props.results)
+        const periods = this.props.results.map((period, index) =>
+        this.displayData(period, index)
+        )
         return (
-            <div>
-                <p> input_tmp: {this.props.input_temp}, day#: {this.state.today}, date: {this.doyToDate(this.state.today)}</p>
-                {this.displayData( this.state.results )}
+            <div className="container">
+                <div className  ="row forcast">
+                    {periods}    
+                </div>
             </div>
         )
     }

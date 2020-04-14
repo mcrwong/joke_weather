@@ -138,7 +138,7 @@ var Forcast = function (_React$Component2) {
                 if (results[0].isDaytime) {
                     return React.createElement(
                         'div',
-                        { className: 'row', id: 'forcast' },
+                        { className: 'row forcast', id: 'forcast' },
                         React.createElement(
                             'div',
                             { className: 'col day' },
@@ -178,7 +178,7 @@ var Forcast = function (_React$Component2) {
                 } else {
                     return React.createElement(
                         'div',
-                        { className: 'row', id: 'forcast' },
+                        { className: 'row forcast', id: 'forcast' },
                         React.createElement(
                             'div',
                             { className: 'col day' },
@@ -246,33 +246,35 @@ var App = function (_React$Component3) {
 
         var _this4 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
+        _this4.handleInput = function (event) {
+            if (event.target.value <= 500 && event.target.value >= -100) {
+                _this4.setState({ input_temp: event.target.value }, _this4.createPeriods);
+            } else if (event.target.value > 500) {
+                _this4.setState({ input_temp: 500 }, _this4.createPeriods);
+            } else if (event.target.value < -100) {
+                _this4.setState({ input_temp: -100 }, _this4.createPeriods);
+            }
+        };
+
+        _this4.handleUnit = function (event) {
+            _this4.setState({ input_unit: event.target.value }, _this4.createPeriods);
+        };
+
         _this4.state = {
             input_temp: 60,
-            input_unit: 'F'
+            input_unit: 'F',
+            today: Date.prototype.getDOY(),
+            info: avg_temps,
+            results: []
         };
         _this4.handleInput = _this4.handleInput.bind(_this4);
         _this4.handleUnit = _this4.handleUnit.bind(_this4);
         _this4.unitconvert = _this4.unitconvert.bind(_this4);
+        _this4.createPeriods = _this4.createPeriods.bind(_this4);
         return _this4;
     }
 
     _createClass(App, [{
-        key: 'handleInput',
-        value: function handleInput(event) {
-            if (event.target.value <= 500 && event.target.value >= -100) {
-                this.setState({ input_temp: event.target.value });
-            } else if (event.target.value > 500) {
-                this.setState({ input_temp: 500 });
-            } else if (event.target.value < -100) {
-                this.setState({ input_temp: -100 });
-            }
-        }
-    }, {
-        key: 'handleUnit',
-        value: function handleUnit(event) {
-            this.setState({ input_unit: event.target.value });
-        }
-    }, {
         key: 'unitconvert',
         value: function unitconvert(number) {
             if (this.state.input_unit != 'F') {
@@ -284,6 +286,34 @@ var App = function (_React$Component3) {
             } else {
                 return number;
             }
+        }
+    }, {
+        key: 'createPeriods',
+        value: function createPeriods() {
+            console.log("changing periods");
+            console.log(this.state.input_temp);
+            console.log(this.state.input_unit);
+            var daysAfterToday = [];
+            for (var key in this.state.info) {
+                if (parseInt(key) > this.state.today) daysAfterToday.push(this.state.info[key].avg);
+            }
+            // create periods
+            var todayNum = this.state.today;
+            var newResults = [];
+            var i = 0;
+            while (i < daysAfterToday.length) {
+                var period = [];
+                if (this.unitconvert(daysAfterToday[i]) > this.state.input_temp) {
+                    while (this.unitconvert(daysAfterToday[i]) > this.state.input_temp) {
+                        var day = todayNum + i;
+                        period.push({ day: todayNum + i, temperature: daysAfterToday[i] });
+                        i++;
+                    }
+                    newResults.push(period);
+                } else i++;
+            }
+
+            this.setState({ results: newResults });
         }
     }, {
         key: 'render',
@@ -344,7 +374,7 @@ var App = function (_React$Component3) {
                 React.createElement(
                     'div',
                     null,
-                    React.createElement(Periods, { unitconvert: this.unitconvert, unit: this.state.input_unit, input_temp: this.state.input_temp })
+                    React.createElement(Periods, { unitconvert: this.unitconvert, unit: this.state.input_unit, input_temp: this.state.input_temp, createPeriods: this.createPeriods, today: this.state.today, info: this.state.info, results: this.state.results })
                 )
             );
         }
@@ -374,6 +404,7 @@ Date.prototype.getDOY = function () {
     return dayOfYear;
 };
 
+<<<<<<< HEAD
 var ExtendedPeriod = function (_ReactComponent) {
     _inherits(ExtendedPeriod, _ReactComponent);
 
@@ -401,10 +432,15 @@ var ExtendedPeriod = function (_ReactComponent) {
 
 var Periods = function (_React$Component4) {
     _inherits(Periods, _React$Component4);
+=======
+var Period = function (_React$Component4) {
+    _inherits(Period, _React$Component4);
+>>>>>>> 432e03b1f9318cf623dc87c9b227d3f8e003c858
 
-    function Periods(props) {
-        _classCallCheck(this, Periods);
+    function Period(props) {
+        _classCallCheck(this, Period);
 
+<<<<<<< HEAD
         var _this6 = _possibleConstructorReturn(this, (Periods.__proto__ || Object.getPrototypeOf(Periods)).call(this, props));
 
         _this6.state = {
@@ -414,50 +450,12 @@ var Periods = function (_React$Component4) {
         };
         _this6.createPeriods = _this6.createPeriods.bind(_this6);
         return _this6;
+=======
+        return _possibleConstructorReturn(this, (Period.__proto__ || Object.getPrototypeOf(Period)).call(this, props));
+>>>>>>> 432e03b1f9318cf623dc87c9b227d3f8e003c858
     }
 
-    _createClass(Periods, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var temp = this.createPeriods();
-            console.log(temp);
-            this.setState({
-                results: temp
-            });
-            console.log(this.state.results);
-        }
-    }, {
-        key: 'createPeriods',
-        value: function createPeriods() {
-            var daysAfterToday = [];
-            for (var key in this.state.info) {
-                if (parseInt(key) > this.state.today) daysAfterToday.push(this.state.info[key].avg);
-            }
-            // create periods
-            var todayNum = this.state.today;
-            var newResults = [];
-            var i = 0;
-            while (i < daysAfterToday.length) {
-                var period = [];
-                if (daysAfterToday[i] > this.props.input_temp) {
-                    while (daysAfterToday[i] > this.props.input_temp) {
-                        var day = todayNum + i;
-                        period.push({ day: todayNum + i, temperature: daysAfterToday[i] });
-                        i++;
-                    }
-                    console.log(period);
-                    newResults.push(period);
-                } else i++;
-            }
-
-            return newResults;
-
-            //this.setState({
-            //    results: newResults,
-            //})
-            //console.log(this.state.results);
-        }
-    }, {
+    _createClass(Period, [{
         key: 'doyToDate',
         value: function doyToDate(doy) {
             var d = new Date();
@@ -465,60 +463,101 @@ var Periods = function (_React$Component4) {
             d.setDate(1);
             d.setDate(doy);
             var months = ["January ", "February ", "March ", "April ", "May ", "June ", "July ", "August ", "September ", "October ", "November ", "December "];
-
             return months[d.getMonth()].concat(d.getDate().toString(), " ", d.getFullYear().toString());
         }
     }, {
-        key: 'displayData',
-        value: function displayData(results) {
-            var period_avgs = [];
-            if (this.state.results.length > 0) {
-                for (var i = 0; i < this.state.results.length; i++) {
-                    var sum = 0;
-                    for (var j = 0; j < this.state.results[i].length; j++) {
-                        sum += this.state.results[i][j].temperature;
-                    }
-                    sum = sum / this.state.results[i].length;
-                    period_avgs.push(sum);
-                    console.log("period avg: ", i, " ", sum);
-                }
-            }
+        key: 'render',
+        value: function render() {
 
             return React.createElement(
                 'div',
-                null,
+                { className: 'col day' },
                 React.createElement(
-                    'div',
-                    { className: 'periodOfDays' },
-                    this.displayData(this.state.results),
-                    this.displayData(this.state.results),
-                    period_avgs.map(function (period) {
-                        return React.createElement(
-                            'p',
-                            { key: period[0]["day"] },
-                            period[0]["day"]
-                        );
-                    })
+                    'p',
+                    null,
+                    this.doyToDate(this.props.data[0]["day"])
+                ),
+                React.createElement(
+                    'p',
+                    null,
+                    'Average temp: ',
+                    React.createElement(
+                        'b',
+                        null,
+                        this.props.unitconvert(this.props.sum),
+                        this.props.unit
+                    )
+                ),
+                React.createElement(
+                    'p',
+                    null,
+                    'Period Length: ',
+                    this.props.length
                 )
+            );
+        }
+    }]);
+
+    return Period;
+}(React.Component);
+
+var Periods = function (_React$Component5) {
+    _inherits(Periods, _React$Component5);
+
+    function Periods(props) {
+        _classCallCheck(this, Periods);
+
+        var _this6 = _possibleConstructorReturn(this, (Periods.__proto__ || Object.getPrototypeOf(Periods)).call(this, props));
+
+        _this6.state = {
+            extension: []
+        };
+        return _this6;
+    }
+
+    _createClass(Periods, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.createPeriods();
+        }
+    }, {
+        key: 'displayData',
+        value: function displayData(iresults, index) {
+            var sum = 0;
+            if (iresults.length > 0) {
+                for (var i = 0; i < iresults.length; i++) {
+                    sum += iresults[i].temperature;
+                }
+                sum = sum / iresults.length;
+                console.log("period avg: ", sum);
+
+                return React.createElement(Period, { key: index, length: iresults.length, sum: sum, data: iresults, unitconvert: this.props.unitconvert, unit: this.props.unit });
+            }
+
+            return React.createElement(
+                'p',
+                null,
+                'No information found'
             );
         }
     }, {
         key: 'render',
         value: function render() {
+            var _this7 = this;
+
+            console.log("rerendering periods");
+            console.log(this.props.results);
+            var periods = this.props.results.map(function (period, index) {
+                return _this7.displayData(period, index);
+            });
             return React.createElement(
                 'div',
-                null,
+                { className: 'container' },
                 React.createElement(
-                    'p',
-                    null,
-                    ' input_tmp: ',
-                    this.props.input_temp,
-                    ', day#: ',
-                    this.state.today,
-                    ', date: ',
-                    this.doyToDate(this.state.today)
-                ),
-                this.displayData(this.state.results)
+                    'div',
+                    { className: 'row forcast' },
+                    periods
+                )
             );
         }
     }]);
