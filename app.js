@@ -56,7 +56,7 @@ var Day = function (_React$Component) {
                 if (this.props.data.length === 1) {
                     return React.createElement(
                         'div',
-                        { className: 'col day border', onClick: this.handleClick },
+                        { className: 'col day onhover border', onClick: this.handleClick },
                         React.createElement(
                             'p',
                             null,
@@ -79,7 +79,7 @@ var Day = function (_React$Component) {
                 } else {
                     return React.createElement(
                         'div',
-                        { className: 'col day border', onClick: this.handleClick },
+                        { className: 'col day onhover border', onClick: this.handleClick },
                         React.createElement(
                             'p',
                             null,
@@ -111,7 +111,7 @@ var Day = function (_React$Component) {
                 if (this.props.data.length === 1) {
                     return React.createElement(
                         'div',
-                        { className: 'col day', onClick: this.handleClick },
+                        { className: 'col onhover day', onClick: this.handleClick },
                         React.createElement(
                             'p',
                             null,
@@ -134,7 +134,7 @@ var Day = function (_React$Component) {
                 } else {
                     return React.createElement(
                         'div',
-                        { className: 'col day', onClick: this.handleClick },
+                        { className: 'col onhover day', onClick: this.handleClick },
                         React.createElement(
                             'p',
                             null,

@@ -106,6 +106,13 @@ img {
     border-style: solid;
     border-color: yellow;
     border-width: 5px;
-    padding: -5px;
     font-size: 20px;
+}
+
+.onhover:hover{
+    border-style: solid;
+    border-color: yellow;
+    border-width: 5px;
+    font-size: 20px;
+
 }
