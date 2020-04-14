@@ -65,6 +65,7 @@ img {
     justify-content: flex-start;
     text-align: center;
     white-space: nowrap;
+    margin: 10px;
 }
 
 .scroll-block {
