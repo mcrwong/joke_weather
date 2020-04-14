@@ -298,7 +298,9 @@ class ExtendedPeriod extends React.Component{
             <div className="col day scroll-block aligncenter">
                 {this.props.day}
                 <br></br>
-                Avg Temp: {this.props.temperature} {this.props.unit}
+                <p>High temp: {this.props.high}{this.props.unit}</p> 
+                <p>Avg Temp: {this.props.temperature}{this.props.unit}</p>
+                <p>Low temp: {this.props.low}{this.props.unit}</p>
             </div>
         )
     }
@@ -310,15 +312,24 @@ class Period extends React.Component {
     }
 
     render() {
-
-
-        return(
-            <div className="col day" id = "period" onClick={this.props.handleClick.bind(this, this.props.index)}>
-                <p>{this.props.doyToDate(this.props.data[0]["day"])}</p>
-                <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
-                <p>Period Length: {this.props.length} days</p>
-            </div> 
-        )
+        if(this.props.length === 1){
+            return(
+                <div className="col day" id = "period" onClick={this.props.handleClick.bind(this, this.props.index)}>
+                    <p>{this.props.doyToDate(this.props.data[0]["day"])}</p>
+                    <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
+                    <p>Period Length: {this.props.length} day</p>
+                </div> 
+            )
+        }
+        else{
+            return(
+                <div className="col day" id = "period" onClick={this.props.handleClick.bind(this, this.props.index)}>
+                    <p>{this.props.doyToDate(this.props.data[0]["day"])}</p>
+                    <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
+                    <p>Period Length: {this.props.length} days</p>
+                </div> 
+            )
+        }
     }
 }
 
@@ -360,14 +371,14 @@ class Periods extends React.Component {
 
     displayDay(day) {
         return(
-            <ExtendedPeriod key={day["day"]} day={this.doyToDate(day["day"])} temperature={this.props.unitconvert(day.temperature)} unit={this.props.unit}/>
+            <ExtendedPeriod key={day["day"]} high={this.props.unitconvert(this.props.info[day["day"]-1]["high"])} low={this.props.unitconvert(this.props.info[day["day"]-1]["low"])} day={this.doyToDate(day["day"])} temperature={this.props.unitconvert(day.temperature)} unit={this.props.unit}/>
         )
     }
 
     render() {
         if(this.props.results.length <= 0){
             return(
-                <p class = "aligncenter">No results found. Try a different temperature.</p>
+                <p className="aligncenter">No results found. Try a different temperature.</p>
             )
         }
         else{
