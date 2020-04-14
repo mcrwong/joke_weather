@@ -237,8 +237,7 @@ Date.prototype.getDOY = function () {
     return dayOfYear;
 };
 
-<<<<<<< HEAD
-class ExtendedPeriod extends ReactComponent{
+class ExtendedPeriod extends React.Component{
     constructor(props){
         super(props)
     }
@@ -254,11 +253,7 @@ class ExtendedPeriod extends ReactComponent{
     }
 }
 
-class Periods extends React.Component {
-=======
-
 class Period extends React.Component {
->>>>>>> 432e03b1f9318cf623dc87c9b227d3f8e003c858
     constructor(props) {
         super(props)
     }

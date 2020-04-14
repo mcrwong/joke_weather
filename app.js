@@ -404,9 +404,8 @@ Date.prototype.getDOY = function () {
     return dayOfYear;
 };
 
-<<<<<<< HEAD
-var ExtendedPeriod = function (_ReactComponent) {
-    _inherits(ExtendedPeriod, _ReactComponent);
+var ExtendedPeriod = function (_React$Component4) {
+    _inherits(ExtendedPeriod, _React$Component4);
 
     function ExtendedPeriod(props) {
         _classCallCheck(this, ExtendedPeriod);
@@ -428,31 +427,15 @@ var ExtendedPeriod = function (_ReactComponent) {
     }]);
 
     return ExtendedPeriod;
-}(ReactComponent);
+}(React.Component);
 
-var Periods = function (_React$Component4) {
-    _inherits(Periods, _React$Component4);
-=======
-var Period = function (_React$Component4) {
-    _inherits(Period, _React$Component4);
->>>>>>> 432e03b1f9318cf623dc87c9b227d3f8e003c858
+var Period = function (_React$Component5) {
+    _inherits(Period, _React$Component5);
 
     function Period(props) {
         _classCallCheck(this, Period);
 
-<<<<<<< HEAD
-        var _this6 = _possibleConstructorReturn(this, (Periods.__proto__ || Object.getPrototypeOf(Periods)).call(this, props));
-
-        _this6.state = {
-            results: [],
-            today: Date.prototype.getDOY(),
-            info: avg_temps
-        };
-        _this6.createPeriods = _this6.createPeriods.bind(_this6);
-        return _this6;
-=======
         return _possibleConstructorReturn(this, (Period.__proto__ || Object.getPrototypeOf(Period)).call(this, props));
->>>>>>> 432e03b1f9318cf623dc87c9b227d3f8e003c858
     }
 
     _createClass(Period, [{
@@ -501,18 +484,18 @@ var Period = function (_React$Component4) {
     return Period;
 }(React.Component);
 
-var Periods = function (_React$Component5) {
-    _inherits(Periods, _React$Component5);
+var Periods = function (_React$Component6) {
+    _inherits(Periods, _React$Component6);
 
     function Periods(props) {
         _classCallCheck(this, Periods);
 
-        var _this6 = _possibleConstructorReturn(this, (Periods.__proto__ || Object.getPrototypeOf(Periods)).call(this, props));
+        var _this7 = _possibleConstructorReturn(this, (Periods.__proto__ || Object.getPrototypeOf(Periods)).call(this, props));
 
-        _this6.state = {
+        _this7.state = {
             extension: []
         };
-        return _this6;
+        return _this7;
     }
 
     _createClass(Periods, [{
@@ -543,12 +526,12 @@ var Periods = function (_React$Component5) {
     }, {
         key: 'render',
         value: function render() {
-            var _this7 = this;
+            var _this8 = this;
 
             console.log("rerendering periods");
             console.log(this.props.results);
             var periods = this.props.results.map(function (period, index) {
-                return _this7.displayData(period, index);
+                return _this8.displayData(period, index);
             });
             return React.createElement(
                 'div',
