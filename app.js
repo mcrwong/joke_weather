@@ -430,7 +430,10 @@ var ExtendedPeriod = function (_React$Component4) {
                 { className: 'col day scroll-block' },
                 this.props.day,
                 React.createElement('br', null),
-                this.props.temperature
+                'Avg Temp:',
+                this.props.temperature,
+                ' ',
+                this.props.unit
             );
         }
     }]);
@@ -569,7 +572,7 @@ var Periods = function (_React$Component6) {
                             { className: 'container' },
                             React.createElement(
                                 'div',
-                                { className: 'row forcast scroll' },
+                                { className: 'row scroll' },
                                 extperiod
                             )
                         )
@@ -580,13 +583,8 @@ var Periods = function (_React$Component6) {
                         { className: 'container' },
                         React.createElement(
                             'div',
-<<<<<<< HEAD
                             { className: 'row forcast' },
                             periods
-=======
-                            { className: 'row scroll' },
-                            extperiod
->>>>>>> 769619168a1be4e11e546cf15167e6ccc89854fe
                         )
                     );
                 }
