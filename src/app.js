@@ -11,7 +11,25 @@ const avg_temps = { "0": { "high": 38, "count": 20, "avg": 29, "low": 19 }, "1":
 class Day extends React.Component {
     constructor(props) {
         super(props);
-        this.getDate = this.getDate.bind(this)
+        this.state={
+            clicked: false
+        }
+        this.getDate = this.getDate.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+
+    }
+
+    handleClick(){
+        if(this.state.clicked){
+            this.setState({
+                clicked: false
+            });
+        }
+        else{
+            this.setState({
+                clicked: true
+            })
+        }
     }
 
     getDate(str) {
@@ -21,27 +39,51 @@ class Day extends React.Component {
     }
 
     render() {
-        if (this.props.data.length === 1) {
-            return (
-                <div>
-                    <p>{this.props.data[0].name}</p>
-                    <p>{this.getDate(this.props.data[0].startTime)}</p>
-                    <img src={this.props.data[0].icon}></img>
-                    <p>Current: {this.props.unitconvert(this.props.data[0].temperature)}{this.props.unit}</p>
-                </div>
-            );
+        if(this.state.clicked){
+            if (this.props.data.length === 1) {
+                return (
+                    <div className="border" onClick={this.handleClick}>
+                        <p>{this.props.data[0].name}</p>
+                        <p>{this.getDate(this.props.data[0].startTime)}</p>
+                        <img src={this.props.data[0].icon}></img>
+                        <p>Current: {this.props.unitconvert(this.props.data[0].temperature)}{this.props.unit}</p>
+                    </div>
+                );
+            }
+            else {
+                return (
+                    <div className="border" onClick={this.handleClick}>
+                        <p>{this.props.data[0].name}</p>
+                        <p>{this.getDate(this.props.data[0].startTime)}</p>
+                        <img src={this.props.data[0].icon}></img>
+                        <p id="hightext">High: {this.props.unitconvert(this.props.data[0].temperature)}{this.props.unit}</p>
+                        <p id="lowtext">Low: {this.props.unitconvert(this.props.data[1].temperature)}{this.props.unit}</p>
+                    </div>
+                );
+            }
         }
-        else {
-            return (
-                <div>
-                    <p>{this.props.data[0].name}</p>
-                    <p>{this.getDate(this.props.data[0].startTime)}</p>
-                    <img src={this.props.data[0].icon}></img>
-                    <p id="hightext">High: {this.props.unitconvert(this.props.data[0].temperature)}{this.props.unit}</p>
-                    <p id="lowtext">Low: {this.props.unitconvert(this.props.data[1].temperature)}{this.props.unit}</p>
-                </div>
-            );
-
+        else{
+            if (this.props.data.length === 1) {
+                return (
+                    <div onClick={this.handleClick}>
+                        <p>{this.props.data[0].name}</p>
+                        <p>{this.getDate(this.props.data[0].startTime)}</p>
+                        <img src={this.props.data[0].icon}></img>
+                        <p>Current: {this.props.unitconvert(this.props.data[0].temperature)}{this.props.unit}</p>
+                    </div>
+                );
+            }
+            else {
+                return (
+                    <div onClick={this.handleClick}>
+                        <p>{this.props.data[0].name}</p>
+                        <p>{this.getDate(this.props.data[0].startTime)}</p>
+                        <img src={this.props.data[0].icon}></img>
+                        <p id="hightext">High: {this.props.unitconvert(this.props.data[0].temperature)}{this.props.unit}</p>
+                        <p id="lowtext">Low: {this.props.unitconvert(this.props.data[1].temperature)}{this.props.unit}</p>
+                    </div>
+                );
+            }
         }
         return (<div></div>);
 

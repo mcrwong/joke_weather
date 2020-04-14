@@ -20,11 +20,29 @@ var Day = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Day.__proto__ || Object.getPrototypeOf(Day)).call(this, props));
 
+        _this.state = {
+            clicked: false
+        };
         _this.getDate = _this.getDate.bind(_this);
+        _this.handleClick = _this.handleClick.bind(_this);
+
         return _this;
     }
 
     _createClass(Day, [{
+        key: 'handleClick',
+        value: function handleClick() {
+            if (this.state.clicked) {
+                this.setState({
+                    clicked: false
+                });
+            } else {
+                this.setState({
+                    clicked: true
+                });
+            }
+        }
+    }, {
         key: 'getDate',
         value: function getDate(str) {
             var date = str.split("T");
@@ -34,59 +52,116 @@ var Day = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            if (this.props.data.length === 1) {
-                return React.createElement(
-                    'div',
-                    null,
-                    React.createElement(
-                        'p',
-                        null,
-                        this.props.data[0].name
-                    ),
-                    React.createElement(
-                        'p',
-                        null,
-                        this.getDate(this.props.data[0].startTime)
-                    ),
-                    React.createElement('img', { src: this.props.data[0].icon }),
-                    React.createElement(
-                        'p',
-                        null,
-                        'Current: ',
-                        this.props.unitconvert(this.props.data[0].temperature),
-                        this.props.unit
-                    )
-                );
+            if (this.state.clicked) {
+                if (this.props.data.length === 1) {
+                    return React.createElement(
+                        'div',
+                        { className: 'border', onClick: this.handleClick },
+                        React.createElement(
+                            'p',
+                            null,
+                            this.props.data[0].name
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            this.getDate(this.props.data[0].startTime)
+                        ),
+                        React.createElement('img', { src: this.props.data[0].icon }),
+                        React.createElement(
+                            'p',
+                            null,
+                            'Current: ',
+                            this.props.unitconvert(this.props.data[0].temperature),
+                            this.props.unit
+                        )
+                    );
+                } else {
+                    return React.createElement(
+                        'div',
+                        { className: 'border', onClick: this.handleClick },
+                        React.createElement(
+                            'p',
+                            null,
+                            this.props.data[0].name
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            this.getDate(this.props.data[0].startTime)
+                        ),
+                        React.createElement('img', { src: this.props.data[0].icon }),
+                        React.createElement(
+                            'p',
+                            { id: 'hightext' },
+                            'High: ',
+                            this.props.unitconvert(this.props.data[0].temperature),
+                            this.props.unit
+                        ),
+                        React.createElement(
+                            'p',
+                            { id: 'lowtext' },
+                            'Low: ',
+                            this.props.unitconvert(this.props.data[1].temperature),
+                            this.props.unit
+                        )
+                    );
+                }
             } else {
-                return React.createElement(
-                    'div',
-                    null,
-                    React.createElement(
-                        'p',
-                        null,
-                        this.props.data[0].name
-                    ),
-                    React.createElement(
-                        'p',
-                        null,
-                        this.getDate(this.props.data[0].startTime)
-                    ),
-                    React.createElement('img', { src: this.props.data[0].icon }),
-                    React.createElement(
-                        'p',
-                        { id: 'hightext' },
-                        'High: ',
-                        this.props.unitconvert(this.props.data[0].temperature),
-                        this.props.unit
-                    ),
-                    React.createElement(
-                        'p',
-                        { id: 'lowtext' },
-                        'Low: ',
-                        this.props.unitconvert(this.props.data[1].temperature),
-                        this.props.unit
-                    )
-                );
+                if (this.props.data.length === 1) {
+                    return React.createElement(
+                        'div',
+                        { onClick: this.handleClick },
+                        React.createElement(
+                            'p',
+                            null,
+                            this.props.data[0].name
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            this.getDate(this.props.data[0].startTime)
+                        ),
+                        React.createElement('img', { src: this.props.data[0].icon }),
+                        React.createElement(
+                            'p',
+                            null,
+                            'Current: ',
+                            this.props.unitconvert(this.props.data[0].temperature),
+                            this.props.unit
+                        )
+                    );
+                } else {
+                    return React.createElement(
+                        'div',
+                        { onClick: this.handleClick },
+                        React.createElement(
+                            'p',
+                            null,
+                            this.props.data[0].name
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            this.getDate(this.props.data[0].startTime)
+                        ),
+                        React.createElement('img', { src: this.props.data[0].icon }),
+                        React.createElement(
+                            'p',
+                            { id: 'hightext' },
+                            'High: ',
+                            this.props.unitconvert(this.props.data[0].temperature),
+                            this.props.unit
+                        ),
+                        React.createElement(
+                            'p',
+                            { id: 'lowtext' },
+                            'Low: ',
+                            this.props.unitconvert(this.props.data[1].temperature),
+                            this.props.unit
+                        )
+                    );
+                }
             }
             return React.createElement('div', null);
         }
