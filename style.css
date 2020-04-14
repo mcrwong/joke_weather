@@ -1,6 +1,5 @@
 body {
     background-color: #e8ecef;
-    font-family: "Helvetica", sans-serif;
 }
 
 img {
@@ -15,11 +14,13 @@ img {
 #title {
     text-align: center;
     margin-bottom: 0px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 #inst {
     text-align: center;
     font-size: 16px;
     padding: 0px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 
 }
 #title-container {
@@ -47,12 +48,14 @@ img {
 } 
 .aligncenter {
     text-align: center;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 .forcast{
     display: flex;
     justify-content: center;
     text-align: center;
     padding: 5px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
 .col {
@@ -69,6 +72,7 @@ img {
 #annarbor {
     font-size: 16px;
     text-align: center;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
 .day {
