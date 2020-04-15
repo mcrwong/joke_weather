@@ -56,7 +56,7 @@ var Day = function (_React$Component) {
                 if (this.props.data.length === 1) {
                     return React.createElement(
                         'div',
-                        { className: 'col day onhover border', onClick: this.handleClick },
+                        { className: 'col day border', onClick: this.handleClick },
                         React.createElement(
                             'p',
                             null,
@@ -79,7 +79,7 @@ var Day = function (_React$Component) {
                 } else {
                     return React.createElement(
                         'div',
-                        { className: 'col day onhover border', onClick: this.handleClick },
+                        { className: 'col day border', onClick: this.handleClick },
                         React.createElement(
                             'p',
                             null,
@@ -111,7 +111,7 @@ var Day = function (_React$Component) {
                 if (this.props.data.length === 1) {
                     return React.createElement(
                         'div',
-                        { className: 'col onhover day', onClick: this.handleClick },
+                        { className: 'col day', onClick: this.handleClick },
                         React.createElement(
                             'p',
                             null,
@@ -134,7 +134,7 @@ var Day = function (_React$Component) {
                 } else {
                     return React.createElement(
                         'div',
-                        { className: 'col onhover day', onClick: this.handleClick },
+                        { className: 'col day', onClick: this.handleClick },
                         React.createElement(
                             'p',
                             null,
@@ -411,9 +411,20 @@ var App = function (_React$Component3) {
                     )
                 ),
                 React.createElement(
+                    'h3',
+                    { className: 'aligncenter' },
+                    'Forecast'
+                ),
+                React.createElement(
                     'div',
                     null,
                     React.createElement(Forcast, { unitconvert: this.unitconvert, unit: this.state.input_unit })
+                ),
+                React.createElement('hr', null),
+                React.createElement(
+                    'h3',
+                    { className: 'aligncenter' },
+                    'Periods'
                 ),
                 React.createElement(
                     'div',

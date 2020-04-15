@@ -276,7 +276,10 @@ class App extends React.Component {
                             <option value="K">K</option>
                     </select>.</p>
                 </div>
+                <h3 className="aligncenter">Forecast</h3>
                 <div><Forcast unitconvert={this.unitconvert} unit={this.state.input_unit} /></div>
+                <hr></hr>
+                <h3 className="aligncenter">Periods</h3>
                 <div id = "inst-container" className = "center">
                     <h3 className="aligncenter" id="inst">Enter a temperature below to view periods of Ann Arbor weather that satisfy your definition of warm. Click a period to see details about each day in the period.</h3>
                 </div>

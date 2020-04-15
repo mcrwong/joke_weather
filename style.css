@@ -116,3 +116,8 @@ img {
     font-size: 20px;
 
 }
+
+hr {
+    display: block;
+    margin: 5px;
+}
