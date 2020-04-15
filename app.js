@@ -285,17 +285,33 @@ var App = function (_React$Component3) {
             today: Date.prototype.getDOY(),
             info: avg_temps,
             results: [],
-            extension: []
+            extension: [],
+            clickindex: -1
         };
         _this4.handleInput = _this4.handleInput.bind(_this4);
         _this4.handleUnit = _this4.handleUnit.bind(_this4);
         _this4.unitconvert = _this4.unitconvert.bind(_this4);
         _this4.createPeriods = _this4.createPeriods.bind(_this4);
         _this4.handleClick = _this4.handleClick.bind(_this4);
+        _this4.handleEvent = _this4.handleEvent.bind(_this4);
         return _this4;
     }
 
     _createClass(App, [{
+        key: 'handleEvent',
+        value: function handleEvent(index, event) {
+            this.handleClick(index, event);
+            if (index === this.state.clickindex) {
+                this.setState({
+                    clickindex: -1
+                });
+            } else {
+                this.setState({
+                    clickindex: index
+                });
+            }
+        }
+    }, {
         key: 'handleClick',
         value: function handleClick(index, event) {
             event.preventDefault();
@@ -340,7 +356,8 @@ var App = function (_React$Component3) {
 
             this.setState({
                 results: newResults,
-                extension: []
+                extension: [],
+                clickindex: -1
             });
         }
     }, {
@@ -422,7 +439,7 @@ var App = function (_React$Component3) {
                 React.createElement(
                     'div',
                     null,
-                    React.createElement(Periods, { extension: this.state.extension, unitconvert: this.unitconvert, unit: this.state.input_unit, input_temp: this.state.input_temp, createPeriods: this.createPeriods, today: this.state.today, info: this.state.info, results: this.state.results, handleClick: this.handleClick })
+                    React.createElement(Periods, { extension: this.state.extension, unitconvert: this.unitconvert, unit: this.state.input_unit, input_temp: this.state.input_temp, createPeriods: this.createPeriods, today: this.state.today, info: this.state.info, results: this.state.results, clickindex: this.state.clickindex, handleEvent: this.handleEvent, handleClick: this.handleClick })
                 )
             );
         }
@@ -637,33 +654,13 @@ var Periods = function (_React$Component6) {
     function Periods(props) {
         _classCallCheck(this, Periods);
 
-        var _this7 = _possibleConstructorReturn(this, (Periods.__proto__ || Object.getPrototypeOf(Periods)).call(this, props));
-
-        _this7.state = {
-            clickindex: -1
-        };
-        _this7.handleEvent = _this7.handleEvent.bind(_this7);
-        return _this7;
+        return _possibleConstructorReturn(this, (Periods.__proto__ || Object.getPrototypeOf(Periods)).call(this, props));
     }
 
     _createClass(Periods, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
             this.props.createPeriods();
-        }
-    }, {
-        key: 'handleEvent',
-        value: function handleEvent(index, event) {
-            this.props.handleClick(index, event);
-            if (index === this.state.clickindex) {
-                this.setState({
-                    clickindex: -1
-                });
-            } else {
-                this.setState({
-                    clickindex: index
-                });
-            }
         }
     }, {
         key: 'doyToDate',
@@ -684,10 +681,10 @@ var Periods = function (_React$Component6) {
                 }
                 sum = Math.round(sum / iresults.length);
 
-                if (index === this.state.clickindex) {
-                    return React.createElement(Period, { key: index, length: iresults.length, sum: sum, data: iresults, index: index, unitconvert: this.props.unitconvert, unit: this.props.unit, handleClick: this.handleEvent, clicked: true, doyToDate: this.doyToDate });
+                if (index === this.props.clickindex) {
+                    return React.createElement(Period, { key: index, length: iresults.length, sum: sum, data: iresults, index: index, unitconvert: this.props.unitconvert, unit: this.props.unit, handleClick: this.props.handleEvent, clicked: true, doyToDate: this.doyToDate });
                 } else {
-                    return React.createElement(Period, { key: index, length: iresults.length, sum: sum, data: iresults, index: index, unitconvert: this.props.unitconvert, unit: this.props.unit, handleClick: this.handleEvent, clicked: false, doyToDate: this.doyToDate });
+                    return React.createElement(Period, { key: index, length: iresults.length, sum: sum, data: iresults, index: index, unitconvert: this.props.unitconvert, unit: this.props.unit, handleClick: this.props.handleEvent, clicked: false, doyToDate: this.doyToDate });
                 }
             }
 

@@ -168,13 +168,30 @@ class App extends React.Component {
             today: Date.prototype.getDOY(),
             info: avg_temps,
             results: [],
-            extension: []
+            extension: [],
+            clickindex: -1
         };
         this.handleInput = this.handleInput.bind(this);
         this.handleUnit = this.handleUnit.bind(this);
         this.unitconvert = this.unitconvert.bind(this);
         this.createPeriods = this.createPeriods.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleEvent = this.handleEvent.bind(this);
+    }
+
+    handleEvent(index, event){
+        this.handleClick(index, event)
+        if(index === this.state.clickindex)
+        {
+            this.setState({
+                clickindex: -1
+            })
+        }
+        else{
+            this.setState({
+                clickindex: index
+            })
+        }
     }
 
     handleClick(index, event){
@@ -240,7 +257,8 @@ class App extends React.Component {
 
         this.setState({
             results: newResults,
-            extension: []
+            extension: [],
+            clickindex: -1
         });
     }
 
@@ -266,7 +284,7 @@ class App extends React.Component {
                     <p className="aligncenter">I think <input autoFocus type="number" id="temperature" value={this.state.input_temp} onChange={this.handleInput} />
                         {this.state.input_unit} is warm.</p>
                 </div>
-                <div><Periods extension={this.state.extension} unitconvert={this.unitconvert} unit={this.state.input_unit} input_temp={this.state.input_temp} createPeriods={this.createPeriods} today={this.state.today} info={this.state.info} results={this.state.results} handleClick={this.handleClick}/></div>
+                <div><Periods extension={this.state.extension} unitconvert={this.unitconvert} unit={this.state.input_unit} input_temp={this.state.input_temp} createPeriods={this.createPeriods} today={this.state.today} info={this.state.info} results={this.state.results} clickindex={this.state.clickindex} handleEvent={this.handleEvent} handleClick={this.handleClick}/></div>
             </div>
         );
     }
@@ -364,30 +382,12 @@ class Period extends React.Component {
 class Periods extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            clickindex: -1
-        }
-        this.handleEvent = this.handleEvent.bind(this)
     }
 
     componentDidMount() {
         this.props.createPeriods()
     }
 
-    handleEvent(index, event){
-        this.props.handleClick(index, event)
-        if(index === this.state.clickindex)
-        {
-            this.setState({
-                clickindex: -1
-            })
-        }
-        else{
-            this.setState({
-                clickindex: index
-            })
-        }
-    }
 
     doyToDate(doy) {
         var d = new Date();
@@ -407,14 +407,14 @@ class Periods extends React.Component {
             }
             sum = Math.round(sum / iresults.length);
 
-            if(index === this.state.clickindex){
+            if(index === this.props.clickindex){
                 return(
-                    <Period key={index} length={iresults.length} sum={sum} data={iresults} index={index} unitconvert={this.props.unitconvert} unit={this.props.unit} handleClick={this.handleEvent} clicked={true} doyToDate={this.doyToDate}/>
+                    <Period key={index} length={iresults.length} sum={sum} data={iresults} index={index} unitconvert={this.props.unitconvert} unit={this.props.unit} handleClick={this.props.handleEvent} clicked={true} doyToDate={this.doyToDate}/>
                 );
             }
             else{
                 return(
-                    <Period key={index} length={iresults.length} sum={sum} data={iresults} index={index} unitconvert={this.props.unitconvert} unit={this.props.unit} handleClick={this.handleEvent} clicked={false} doyToDate={this.doyToDate}/>
+                    <Period key={index} length={iresults.length} sum={sum} data={iresults} index={index} unitconvert={this.props.unitconvert} unit={this.props.unit} handleClick={this.props.handleEvent} clicked={false} doyToDate={this.doyToDate}/>
                 );
             }
         }
