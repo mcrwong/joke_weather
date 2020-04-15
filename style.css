@@ -60,7 +60,7 @@ img {
 
 .col {
     align-content: center;
-    border: 2px solid #f2cd75;
+    border: 2px solid;
     margin: 0px 10px;
 }
 #hightext{
@@ -75,7 +75,7 @@ img {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 #period:hover {
-    border-color: #ecf277;
+    border-color: #fb2728;
 }
 
 .day {
@@ -104,14 +104,14 @@ img {
 
 .border{
     border-style: solid;
-    border-color: #ecf277;
+    border-color: #fb2728;
     border-width: 5px;
     font-size: 20px;
 }
 
 .onhover:hover{
     border-style: solid;
-    border-color: #ecf277;
+    border-color: #fb2728;
     border-width: 5px;
     font-size: 20px;
 
