@@ -169,7 +169,8 @@ class App extends React.Component {
             info: avg_temps,
             results: [],
             extension: [],
-            clickindex: -1
+            clickindex: -1,
+            selectindex: -1
         };
         this.handleInput = this.handleInput.bind(this);
         this.handleUnit = this.handleUnit.bind(this);
@@ -196,8 +197,19 @@ class App extends React.Component {
 
     handleClick(index, event){
         event.preventDefault();
-        const period = this.state.results[index]
-        this.setState({ extension: period })
+        if(index === this.state.selectindex){
+            this.setState({
+                extension: [],
+                selectindex: -1
+            })
+        }
+        else{
+            const period = this.state.results[index]
+            this.setState({
+                extension: period,
+                selectindex: index
+            })
+        }
     }
 
     handleInput = (event) => {
@@ -258,7 +270,8 @@ class App extends React.Component {
         this.setState({
             results: newResults,
             extension: [],
-            clickindex: -1
+            clickindex: -1,
+            selectindex: -1
         });
     }
 

@@ -286,7 +286,8 @@ var App = function (_React$Component3) {
             info: avg_temps,
             results: [],
             extension: [],
-            clickindex: -1
+            clickindex: -1,
+            selectindex: -1
         };
         _this4.handleInput = _this4.handleInput.bind(_this4);
         _this4.handleUnit = _this4.handleUnit.bind(_this4);
@@ -315,8 +316,18 @@ var App = function (_React$Component3) {
         key: 'handleClick',
         value: function handleClick(index, event) {
             event.preventDefault();
-            var period = this.state.results[index];
-            this.setState({ extension: period });
+            if (index === this.state.selectindex) {
+                this.setState({
+                    extension: [],
+                    selectindex: -1
+                });
+            } else {
+                var period = this.state.results[index];
+                this.setState({
+                    extension: period,
+                    selectindex: index
+                });
+            }
         }
     }, {
         key: 'unitconvert',
@@ -357,7 +368,8 @@ var App = function (_React$Component3) {
             this.setState({
                 results: newResults,
                 extension: [],
-                clickindex: -1
+                clickindex: -1,
+                selectindex: -1
             });
         }
     }, {
