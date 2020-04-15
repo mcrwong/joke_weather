@@ -745,6 +745,11 @@ var Periods = function (_React$Component6) {
                             'div',
                             { className: 'container' },
                             React.createElement(
+                                'h4',
+                                { className: 'aligncenter' },
+                                'Details'
+                            ),
+                            React.createElement(
                                 'div',
                                 { className: 'row scroll' },
                                 extperiod
