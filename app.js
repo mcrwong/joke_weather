@@ -749,7 +749,7 @@ var Periods = function (_React$Component6) {
                             { className: 'container' },
                             React.createElement(
                                 'div',
-                                { className: 'row forcast' },
+                                { className: 'row forcast setheight2' },
                                 periods
                             )
                         ),
@@ -777,7 +777,7 @@ var Periods = function (_React$Component6) {
                             { className: 'container' },
                             React.createElement(
                                 'div',
-                                { className: 'row forcast' },
+                                { className: 'row forcast setheight2' },
                                 periods
                             )
                         ),

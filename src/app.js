@@ -461,7 +461,7 @@ class Periods extends React.Component {
             return (
                 <div>
                     <div className="container">
-                        <div className  ="row forcast">
+                        <div className  ="row forcast setheight2">
                             {periods}    
                         </div>
                     </div>
@@ -478,7 +478,7 @@ class Periods extends React.Component {
             return (
                 <div>
                     <div className="container">
-                        <div className  ="row forcast">
+                        <div className  ="row forcast setheight2">
                             {periods}    
                         </div>
                     </div>
