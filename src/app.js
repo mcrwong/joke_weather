@@ -251,17 +251,20 @@ class App extends React.Component {
                     <h2 className="aligncenter" id="title">When is it Warm?<img src="titleicon.png" id="titlepic"></img></h2>
                     <p id="annarbor">Ann Arbor, MI</p>
                 </div>
+                <div className="center">
+                    <p className="aligncenter">I like my temperature displayed in <select value={this.state.input_unit} onChange={this.handleUnit}>
+                            <option value="F">F</option>
+                            <option value="C">C</option>
+                            <option value="K">K</option>
+                    </select>.</p>
+                </div>
                 <div><Forcast unitconvert={this.unitconvert} unit={this.state.input_unit} /></div>
                 <div id = "inst-container" className = "center">
                     <h3 className="aligncenter" id="inst">Enter a temperature below to view periods of Ann Arbor weather that satisfy your definition of warm. Click a period to see details about each day in the period.</h3>
                 </div>
                 <div className="center">
                     <p className="aligncenter">I think <input autoFocus type="number" id="temperature" value={this.state.input_temp} onChange={this.handleInput} />
-                        <select value={this.state.input_unit} onChange={this.handleUnit}>
-                            <option value="F">F</option>
-                            <option value="C">C</option>
-                            <option value="K">K</option>
-                        </select> is warm.</p>
+                        {this.state.input_unit} is warm.</p>
                 </div>
                 <div><Periods extension={this.state.extension} unitconvert={this.unitconvert} unit={this.state.input_unit} input_temp={this.state.input_temp} createPeriods={this.createPeriods} today={this.state.today} info={this.state.info} results={this.state.results} handleClick={this.handleClick}/></div>
             </div>
@@ -311,36 +314,79 @@ class Period extends React.Component {
         super(props)
     }
 
+
     render() {
-        if(this.props.length === 1){
-            return(
-                <div className="col day" id="period" onClick={this.props.handleClick.bind(this, this.props.index)}>
-                    <p>{this.props.doyToDate(this.props.data[0]["day"])}</p>
-                    <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
-                    <p>Period Length: {this.props.length} day</p>
-                </div> 
-            )
+        if(this.props.clicked){
+            if(this.props.length === 1){
+                return(
+                    <div className="col day border" id="period" onClick={this.props.handleClick.bind(this, this.props.index)}>
+                        <p>{this.props.doyToDate(this.props.data[0]["day"])}</p>
+                        <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
+                        <p>Period Length: {this.props.length} day</p>
+                    </div> 
+                )
+            }
+            else{
+                return(
+                    <div className="col day border" id="period" onClick={this.props.handleClick.bind(this, this.props.index)}>
+                        <p>{this.props.doyToDate(this.props.data[0]["day"])}</p>
+                        <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
+                        <p>Period Length: {this.props.length} days</p>
+                    </div> 
+                )
+            }
         }
         else{
-            return(
-                <div className="col day" id="period" onClick={this.props.handleClick.bind(this, this.props.index)}>
-                    <p>{this.props.doyToDate(this.props.data[0]["day"])}</p>
-                    <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
-                    <p>Period Length: {this.props.length} days</p>
-                </div> 
-            )
+            if(this.props.length === 1){
+                return(
+                    <div className="col day" id="period" onClick={this.props.handleClick.bind(this, this.props.index)}>
+                        <p>{this.props.doyToDate(this.props.data[0]["day"])}</p>
+                        <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
+                        <p>Period Length: {this.props.length} day</p>
+                    </div> 
+                )
+            }
+            else{
+                return(
+                    <div className="col day" id="period" onClick={this.props.handleClick.bind(this, this.props.index)}>
+                        <p>{this.props.doyToDate(this.props.data[0]["day"])}</p>
+                        <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
+                        <p>Period Length: {this.props.length} days</p>
+                    </div> 
+                )
+            }
         }
     }
 }
 
 
+
 class Periods extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            clickindex: -1
+        }
+        this.handleEvent = this.handleEvent.bind(this)
     }
 
     componentDidMount() {
         this.props.createPeriods()
+    }
+
+    handleEvent(index, event){
+        this.props.handleClick(index, event)
+        if(index === this.state.clickindex)
+        {
+            this.setState({
+                clickindex: -1
+            })
+        }
+        else{
+            this.setState({
+                clickindex: index
+            })
+        }
     }
 
     doyToDate(doy) {
@@ -361,9 +407,16 @@ class Periods extends React.Component {
             }
             sum = Math.round(sum / iresults.length);
 
-            return(
-                <Period key={index} length={iresults.length} sum={sum} data={iresults} index={index} unitconvert={this.props.unitconvert} unit={this.props.unit} handleClick={this.props.handleClick} doyToDate={this.doyToDate}/>
-            );
+            if(index === this.state.clickindex){
+                return(
+                    <Period key={index} length={iresults.length} sum={sum} data={iresults} index={index} unitconvert={this.props.unitconvert} unit={this.props.unit} handleClick={this.handleEvent} clicked={true} doyToDate={this.doyToDate}/>
+                );
+            }
+            else{
+                return(
+                    <Period key={index} length={iresults.length} sum={sum} data={iresults} index={index} unitconvert={this.props.unitconvert} unit={this.props.unit} handleClick={this.handleEvent} clicked={false} doyToDate={this.doyToDate}/>
+                );
+            }
         }
 
         return(<p>No information found</p>)

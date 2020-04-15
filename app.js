@@ -366,6 +366,35 @@ var App = function (_React$Component3) {
                 ),
                 React.createElement(
                     'div',
+                    { className: 'center' },
+                    React.createElement(
+                        'p',
+                        { className: 'aligncenter' },
+                        'I like my temperature displayed in ',
+                        React.createElement(
+                            'select',
+                            { value: this.state.input_unit, onChange: this.handleUnit },
+                            React.createElement(
+                                'option',
+                                { value: 'F' },
+                                'F'
+                            ),
+                            React.createElement(
+                                'option',
+                                { value: 'C' },
+                                'C'
+                            ),
+                            React.createElement(
+                                'option',
+                                { value: 'K' },
+                                'K'
+                            )
+                        ),
+                        '.'
+                    )
+                ),
+                React.createElement(
+                    'div',
                     null,
                     React.createElement(Forcast, { unitconvert: this.unitconvert, unit: this.state.input_unit })
                 ),
@@ -386,25 +415,7 @@ var App = function (_React$Component3) {
                         { className: 'aligncenter' },
                         'I think ',
                         React.createElement('input', { autoFocus: true, type: 'number', id: 'temperature', value: this.state.input_temp, onChange: this.handleInput }),
-                        React.createElement(
-                            'select',
-                            { value: this.state.input_unit, onChange: this.handleUnit },
-                            React.createElement(
-                                'option',
-                                { value: 'F' },
-                                'F'
-                            ),
-                            React.createElement(
-                                'option',
-                                { value: 'C' },
-                                'C'
-                            ),
-                            React.createElement(
-                                'option',
-                                { value: 'K' },
-                                'K'
-                            )
-                        ),
+                        this.state.input_unit,
                         ' is warm.'
                     )
                 ),
@@ -497,62 +508,122 @@ var Period = function (_React$Component5) {
     _createClass(Period, [{
         key: 'render',
         value: function render() {
-            if (this.props.length === 1) {
-                return React.createElement(
-                    'div',
-                    { className: 'col day', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
-                    React.createElement(
-                        'p',
-                        null,
-                        this.props.doyToDate(this.props.data[0]["day"])
-                    ),
-                    React.createElement(
-                        'p',
-                        null,
-                        'Average temp: ',
+            if (this.props.clicked) {
+                if (this.props.length === 1) {
+                    return React.createElement(
+                        'div',
+                        { className: 'col day border', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
                         React.createElement(
-                            'b',
+                            'p',
                             null,
-                            this.props.unitconvert(this.props.sum),
-                            this.props.unit
+                            this.props.doyToDate(this.props.data[0]["day"])
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            'Average temp: ',
+                            React.createElement(
+                                'b',
+                                null,
+                                this.props.unitconvert(this.props.sum),
+                                this.props.unit
+                            )
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            'Period Length: ',
+                            this.props.length,
+                            ' day'
                         )
-                    ),
-                    React.createElement(
-                        'p',
-                        null,
-                        'Period Length: ',
-                        this.props.length,
-                        ' day'
-                    )
-                );
+                    );
+                } else {
+                    return React.createElement(
+                        'div',
+                        { className: 'col day border', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
+                        React.createElement(
+                            'p',
+                            null,
+                            this.props.doyToDate(this.props.data[0]["day"])
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            'Average temp: ',
+                            React.createElement(
+                                'b',
+                                null,
+                                this.props.unitconvert(this.props.sum),
+                                this.props.unit
+                            )
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            'Period Length: ',
+                            this.props.length,
+                            ' days'
+                        )
+                    );
+                }
             } else {
-                return React.createElement(
-                    'div',
-                    { className: 'col day', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
-                    React.createElement(
-                        'p',
-                        null,
-                        this.props.doyToDate(this.props.data[0]["day"])
-                    ),
-                    React.createElement(
-                        'p',
-                        null,
-                        'Average temp: ',
+                if (this.props.length === 1) {
+                    return React.createElement(
+                        'div',
+                        { className: 'col day', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
                         React.createElement(
-                            'b',
+                            'p',
                             null,
-                            this.props.unitconvert(this.props.sum),
-                            this.props.unit
+                            this.props.doyToDate(this.props.data[0]["day"])
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            'Average temp: ',
+                            React.createElement(
+                                'b',
+                                null,
+                                this.props.unitconvert(this.props.sum),
+                                this.props.unit
+                            )
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            'Period Length: ',
+                            this.props.length,
+                            ' day'
                         )
-                    ),
-                    React.createElement(
-                        'p',
-                        null,
-                        'Period Length: ',
-                        this.props.length,
-                        ' days'
-                    )
-                );
+                    );
+                } else {
+                    return React.createElement(
+                        'div',
+                        { className: 'col day', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
+                        React.createElement(
+                            'p',
+                            null,
+                            this.props.doyToDate(this.props.data[0]["day"])
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            'Average temp: ',
+                            React.createElement(
+                                'b',
+                                null,
+                                this.props.unitconvert(this.props.sum),
+                                this.props.unit
+                            )
+                        ),
+                        React.createElement(
+                            'p',
+                            null,
+                            'Period Length: ',
+                            this.props.length,
+                            ' days'
+                        )
+                    );
+                }
             }
         }
     }]);
@@ -566,13 +637,33 @@ var Periods = function (_React$Component6) {
     function Periods(props) {
         _classCallCheck(this, Periods);
 
-        return _possibleConstructorReturn(this, (Periods.__proto__ || Object.getPrototypeOf(Periods)).call(this, props));
+        var _this7 = _possibleConstructorReturn(this, (Periods.__proto__ || Object.getPrototypeOf(Periods)).call(this, props));
+
+        _this7.state = {
+            clickindex: -1
+        };
+        _this7.handleEvent = _this7.handleEvent.bind(_this7);
+        return _this7;
     }
 
     _createClass(Periods, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
             this.props.createPeriods();
+        }
+    }, {
+        key: 'handleEvent',
+        value: function handleEvent(index, event) {
+            this.props.handleClick(index, event);
+            if (index === this.state.clickindex) {
+                this.setState({
+                    clickindex: -1
+                });
+            } else {
+                this.setState({
+                    clickindex: index
+                });
+            }
         }
     }, {
         key: 'doyToDate',
@@ -593,7 +684,11 @@ var Periods = function (_React$Component6) {
                 }
                 sum = Math.round(sum / iresults.length);
 
-                return React.createElement(Period, { key: index, length: iresults.length, sum: sum, data: iresults, index: index, unitconvert: this.props.unitconvert, unit: this.props.unit, handleClick: this.props.handleClick, doyToDate: this.doyToDate });
+                if (index === this.state.clickindex) {
+                    return React.createElement(Period, { key: index, length: iresults.length, sum: sum, data: iresults, index: index, unitconvert: this.props.unitconvert, unit: this.props.unit, handleClick: this.handleEvent, clicked: true, doyToDate: this.doyToDate });
+                } else {
+                    return React.createElement(Period, { key: index, length: iresults.length, sum: sum, data: iresults, index: index, unitconvert: this.props.unitconvert, unit: this.props.unit, handleClick: this.handleEvent, clicked: false, doyToDate: this.doyToDate });
+                }
             }
 
             return React.createElement(
