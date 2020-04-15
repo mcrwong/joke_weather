@@ -552,7 +552,7 @@ var Period = function (_React$Component5) {
                 if (this.props.length === 1) {
                     return React.createElement(
                         'div',
-                        { className: 'col day border', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
+                        { className: 'col day border-small', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
                         React.createElement(
                             'p',
                             null,
@@ -580,7 +580,7 @@ var Period = function (_React$Component5) {
                 } else {
                     return React.createElement(
                         'div',
-                        { className: 'col day border', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
+                        { className: 'col day border-small', id: 'period', onClick: this.props.handleClick.bind(this, this.props.index) },
                         React.createElement(
                             'p',
                             null,
