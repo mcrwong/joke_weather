@@ -121,3 +121,11 @@ hr {
     display: block;
     margin: 5px;
 }
+
+.spacer {
+    height: 195px;
+}
+
+.setheight {
+    height: 272px;
+}

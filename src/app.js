@@ -120,7 +120,7 @@ class Forcast extends React.Component {
         if (results.length > 0) {
             if (results[0].isDaytime) {
                 return (
-                    <div className="row forcast" id="forcast">
+                    <div className="row forcast setheight" id="forcast">
                         <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(0, 2)} />
                         <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(2, 4)} />
                         <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(4, 6)} />
@@ -133,7 +133,7 @@ class Forcast extends React.Component {
             }
             else {
                 return (
-                    <div className="row forcast" id="forcast">
+                    <div className="row forcast setheight" id="forcast">
                         <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={[results[0]]} />
                         <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(1, 3)} />
                         <Day unitconvert={this.props.unitconvert} unit={this.props.unit} data={results.slice(3, 5)} />
@@ -476,10 +476,13 @@ class Periods extends React.Component {
         }
         else{
             return (
-                <div className="container">
-                    <div className  ="row forcast">
-                        {periods}    
+                <div>
+                    <div className="container">
+                        <div className  ="row forcast">
+                            {periods}    
+                        </div>
                     </div>
+                    <div className="spacer"></div>
                 </div>
             )
         }

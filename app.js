@@ -213,7 +213,7 @@ var Forcast = function (_React$Component2) {
                 if (results[0].isDaytime) {
                     return React.createElement(
                         'div',
-                        { className: 'row forcast', id: 'forcast' },
+                        { className: 'row forcast setheight', id: 'forcast' },
                         React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(0, 2) }),
                         React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(2, 4) }),
                         React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(4, 6) }),
@@ -225,7 +225,7 @@ var Forcast = function (_React$Component2) {
                 } else {
                     return React.createElement(
                         'div',
-                        { className: 'row forcast', id: 'forcast' },
+                        { className: 'row forcast setheight', id: 'forcast' },
                         React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: [results[0]] }),
                         React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(1, 3) }),
                         React.createElement(Day, { unitconvert: this.props.unitconvert, unit: this.props.unit, data: results.slice(3, 5) }),
@@ -771,12 +771,17 @@ var Periods = function (_React$Component6) {
                 } else {
                     return React.createElement(
                         'div',
-                        { className: 'container' },
+                        null,
                         React.createElement(
                             'div',
-                            { className: 'row forcast' },
-                            periods
-                        )
+                            { className: 'container' },
+                            React.createElement(
+                                'div',
+                                { className: 'row forcast' },
+                                periods
+                            )
+                        ),
+                        React.createElement('div', { className: 'spacer' })
                     );
                 }
             }
