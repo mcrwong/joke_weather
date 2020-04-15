@@ -755,7 +755,7 @@ var Periods = function (_React$Component6) {
                         ),
                         React.createElement(
                             'div',
-                            { className: 'container' },
+                            { className: 'container setheight3' },
                             React.createElement(
                                 'h4',
                                 { className: 'aligncenter' },

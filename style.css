@@ -123,7 +123,7 @@ hr {
 }
 
 .spacer {
-    height: 195px;
+    height: 212px;
 }
 
 .setheight {
@@ -132,4 +132,8 @@ hr {
 
 .setheight2 {
     height: 144px;
+}
+
+.setheight3 {
+    height: 212px;
 }
