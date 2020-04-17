@@ -444,7 +444,9 @@ var App = function (_React$Component3) {
                     React.createElement(
                         'h3',
                         { className: 'aligncenter', id: 'inst' },
-                        'Enter a temperature below to view periods of Ann Arbor weather that satisfy your definition of warm. Click a period to see details about each day in the period.'
+                        'Enter a temperature below to view periods of Ann Arbor weather that satisfy your definition of warm.',
+                        React.createElement('br', null),
+                        'Click a period below to see details about each day in the period.'
                     )
                 ),
                 React.createElement(

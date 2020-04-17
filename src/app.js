@@ -294,7 +294,7 @@ class App extends React.Component {
                 <hr></hr>
                 <h3 className="aligncenter">Periods</h3>
                 <div id = "inst-container" className = "center">
-                    <h3 className="aligncenter" id="inst">Enter a temperature below to view periods of Ann Arbor weather that satisfy your definition of warm. Click a period to see details about each day in the period.</h3>
+                    <h3 className="aligncenter" id="inst">Enter a temperature below to view periods of Ann Arbor weather that satisfy your definition of warm.<br></br>Click a period below to see details about each day in the period.</h3>
                 </div>
                 <div className="center">
                     <p className="aligncenter">I think <input autoFocus type="number" id="temperature" value={this.state.input_temp} onChange={this.handleInput} />
