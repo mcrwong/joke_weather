@@ -579,8 +579,12 @@ var Period = function (_React$Component5) {
                             'p',
                             null,
                             'Period Length: ',
-                            this.props.length,
-                            ' day'
+                            React.createElement(
+                                'b',
+                                null,
+                                this.props.length,
+                                ' day'
+                            )
                         )
                     );
                 } else {
@@ -613,8 +617,12 @@ var Period = function (_React$Component5) {
                             'p',
                             null,
                             'Period Length: ',
-                            this.props.length,
-                            ' days'
+                            React.createElement(
+                                'b',
+                                null,
+                                this.props.length,
+                                ' days'
+                            )
                         )
                     );
                 }
@@ -649,8 +657,12 @@ var Period = function (_React$Component5) {
                             'p',
                             null,
                             'Period Length: ',
-                            this.props.length,
-                            ' day'
+                            React.createElement(
+                                'b',
+                                null,
+                                this.props.length,
+                                ' day'
+                            )
                         )
                     );
                 } else {
@@ -683,8 +695,12 @@ var Period = function (_React$Component5) {
                             'p',
                             null,
                             'Period Length: ',
-                            this.props.length,
-                            ' days'
+                            React.createElement(
+                                'b',
+                                null,
+                                this.props.length,
+                                ' days'
+                            )
                         )
                     );
                 }

@@ -357,7 +357,7 @@ class Period extends React.Component {
                         <p>Start Date: 
                         <b> {this.props.doyToDate(this.props.data[0]["day"])}</b></p>
                         <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
-                        <p>Period Length: {this.props.length} day</p>
+                        <p>Period Length: <b>{this.props.length} day</b></p>
                     </div> 
                 )
             }
@@ -367,7 +367,7 @@ class Period extends React.Component {
                         <p>Start Date: 
                         <b> {this.props.doyToDate(this.props.data[0]["day"])}</b></p>
                         <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
-                        <p>Period Length: {this.props.length} days</p>
+                        <p>Period Length: <b>{this.props.length} days</b></p>
                     </div> 
                 )
             }
@@ -379,7 +379,7 @@ class Period extends React.Component {
                         <p>Start Date: 
                         <b> {this.props.doyToDate(this.props.data[0]["day"])}</b></p>
                         <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
-                        <p>Period Length: {this.props.length} day</p>
+                        <p>Period Length: <b>{this.props.length} day</b></p>
                     </div> 
                 )
             }
@@ -389,7 +389,7 @@ class Period extends React.Component {
                         <p>Start Date: 
                         <b> {this.props.doyToDate(this.props.data[0]["day"])}</b></p>
                         <p>Average temp: <b>{this.props.unitconvert(this.props.sum)}{this.props.unit}</b></p>
-                        <p>Period Length: {this.props.length} days</p>
+                        <p>Period Length: <b>{this.props.length} days</b></p>
                     </div> 
                 )
             }
