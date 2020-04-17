@@ -556,7 +556,13 @@ var Period = function (_React$Component5) {
                         React.createElement(
                             'p',
                             null,
-                            this.props.doyToDate(this.props.data[0]["day"])
+                            'Start Date:',
+                            React.createElement(
+                                'b',
+                                null,
+                                ' ',
+                                this.props.doyToDate(this.props.data[0]["day"])
+                            )
                         ),
                         React.createElement(
                             'p',
@@ -584,7 +590,13 @@ var Period = function (_React$Component5) {
                         React.createElement(
                             'p',
                             null,
-                            this.props.doyToDate(this.props.data[0]["day"])
+                            'Start Date:',
+                            React.createElement(
+                                'b',
+                                null,
+                                ' ',
+                                this.props.doyToDate(this.props.data[0]["day"])
+                            )
                         ),
                         React.createElement(
                             'p',
@@ -614,7 +626,13 @@ var Period = function (_React$Component5) {
                         React.createElement(
                             'p',
                             null,
-                            this.props.doyToDate(this.props.data[0]["day"])
+                            'Start Date:',
+                            React.createElement(
+                                'b',
+                                null,
+                                ' ',
+                                this.props.doyToDate(this.props.data[0]["day"])
+                            )
                         ),
                         React.createElement(
                             'p',
@@ -642,7 +660,13 @@ var Period = function (_React$Component5) {
                         React.createElement(
                             'p',
                             null,
-                            this.props.doyToDate(this.props.data[0]["day"])
+                            'Start Date:',
+                            React.createElement(
+                                'b',
+                                null,
+                                ' ',
+                                this.props.doyToDate(this.props.data[0]["day"])
+                            )
                         ),
                         React.createElement(
                             'p',
